@@ -113,7 +113,7 @@ $(function(){
 						<div class="content">			 											
 							<div id="content">
 								<a id="weather" onclick="location='weather.ho'">What should I wear today?</a> <br/><br/>
-								<a id="daliy" onclick="location='index'">DailyLook</a> <br/><br/>
+								<a id="daliy" href="list.gal">DailyLook</a> <br/><br/>
 								<a href="list.se">UsedMarket</a><br/>
 								<div class="group">												
 									<div class="box">

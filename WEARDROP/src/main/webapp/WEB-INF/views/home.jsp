@@ -252,7 +252,7 @@ function go_logout() {
 			
 			<div id="content">
 					<a id="weather" onclick="location='weather.ho'">What should I wear Today?</a> <br/><br/>
-					<a id="daliy" onclick="location='index'">DailyLook</a> <br/><br/>
+					<a id="daliy" href="list.gal">DailyLook</a> <br/><br/>
 					<a href="list.se">UsedMarket</a><br/><br/>	
 					<div class="group">		
 							

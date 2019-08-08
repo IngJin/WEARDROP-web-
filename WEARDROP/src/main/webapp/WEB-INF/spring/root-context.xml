@@ -7,5 +7,5 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<import resource="classpath:data/*.xml"/>	
-	<context:component-scan base-package="sell, Android_Ser, common, main, community"/>
+	<context:component-scan base-package="sell, Android_Ser, common, main, community, gallery"/>
 </beans>
