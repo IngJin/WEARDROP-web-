@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
 <title>한울직업전문학교</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<link rel="stylesheet" type="text/css" href="css/common.css?v=<%= new Date().getTime() %>">
 <link rel="icon" type="image/x-icon" href="img/hanul.ico">
 <script type="text/javascript" src="js/common.js"></script>
 </head>

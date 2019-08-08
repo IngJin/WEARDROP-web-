@@ -265,9 +265,9 @@ function go_logout() {
 		 		
 						<div class="box">
 							<div class="title"><a href="#">Community</a></div>	
-							<div class="cont"><a onclick="location='index'">Free Board</a></div>
-							<div class="cont"><a onclick="location='index'">Reviews</a></div>			
-							<div class="cont"><a onclick="location='index'">Find a store</a></div>
+							<div class="cont"><a href="list.com">Free Board</a></div>
+							<div class="cont"><a href="list.hu">Reviews</a></div>			
+							<div class="cont"><a href="map.com">Find a store</a></div>
 						</div><br/>
 												
 				</div>
