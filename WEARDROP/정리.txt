@@ -1,0 +1,220 @@
+URL/URI 요청 → Controller → Service(Action) → DAO → Mapper:VO → 사용자 화면 응답
+
+system 접속하여
+새로운 유저를 생성한다
+create user iot identified by iot;
+grant dba to iot;
+
+고객관리
+create table customer (
+	id		number constraint customer_id_pk primary key,
+	name	varchar2(50) not null,
+	gender	varchar2(3) default '남' not null,
+	email	varchar2(50),
+	phone	varchar2(13)
+	filename	varchar2(300),
+	filepath	varchar2(300),
+	root		number,
+	step		number default 0,
+	indent		number default 0
+);
+
+답글처리
+alter table notice
+add(root		number,
+	step		number default 0,
+	indent		number default 0);
+
+트리거로 시퀀스가 자동적용되지 않도록 처리한다.
+alter trigger trg_notice disable;
+update notice set root=id;
+
+파일 입출력
+alter table notice
+add (filename	varchar2(300),
+	filepath	varchar2(300) );
+
+create sequence seq_customer
+start with 1 increment by 1;
+
+
+테이블에 데이터 삽입저장시 시퀀스를 자동으로 적용되게 하는 처리를 할 트리거
+create or replace trigger trg_customer
+	before insert on customer
+	for each row
+begin
+	select seq_customer.nextval  into :new.id from dual;
+end;
+/
+insert into customer(id, name, gender, email, phone)
+values (seq_customer.nextval, '홍', 'hong@', '');
+
+
+공지사항 관리
+create table notice(
+	id			number constraint notice_id_pk primary key,
+	title		varchar2(300) not null,
+	content 	varchar2(4000) not null,
+	writer		varchar2(50) not null,
+	writedate	date default sysdate,
+	readcnt		number default 0
+);
+
+create sequence seq_notice
+start with 1 increment by 1;
+
+create or replace trigger trg_notice
+	before insert on notice
+	for each row
+begin
+	select seq_notice.nextval into :new.id from dual;
+end;
+/
+
+회원관리
+create table member(
+	name		varchar2(50) not null,
+	userid		varchar2(50) constraint member_userid_pk primary key,
+	userpwd		varchar2(50) not null,
+	gender		varchar2(3) default '남' not null,
+	email		varchar2(50) not null,
+	birth		date,
+	phone		varchar2(13),
+	post		varchar2(7), 
+	address		varchar2(300),
+	admin		varchar2(1) default 'N'
+);
+
+방명록 관리
+create table board (
+	id			number constraint board_id_pk primary key,
+	userid		varchar2(50) not null, /* 로그인한 글 작성자 아이디 */
+	title		varchar2(300) not null,
+	content		varchar2(4000) not null,
+	writedate	date default sysdate,
+	readcnt		number default 0,
+	filename	varchar2(300),
+	filepath	varchar2(300)	
+);
+
+create sequence seq_board
+start with 1 increment by 1;
+
+create or replace trigger trg_board
+	before insert on board
+	for each row
+begin
+	select seq_board.nextval into :new.id from dual;
+end;
+/
+
+방명록에 대한 댓글정보 관리
+create table board_comment(
+	id			number constraint board_comment_id_pk primary key,
+	userid		varchar2(50) not null,
+	content		varchar2(4000) not null,
+	writedate	date default sysdate,
+	pid			number, /* 방명록 글의 id */	
+	/* 원글인 방명록 글이 삭제될 때 딸린 댓글도 함께 삭제 */
+	constraint board_comment_pid_fk foreign key(pid)
+				references board(id) on delete cascade,
+	/* 댓글 작성한 회원이 탈퇴시 해당 회원의 댓글도 함께 삭제 */
+	constraint board_comment_userid_fk foreign key(userid)
+				references member(userid) on delete cascade
+);
+
+create sequence seq_board_comment
+start with 1 increment by 1;
+
+create or replace trigger trg_board_comment
+	before insert on board_comment
+	for each row
+begin
+	select seq_board_comment.nextval into :new.id from dual;
+end;
+/
+
+라이브러리는 공공저장소에서 다운로드한다. : https://mvnrepository.com/
+Spting 에서 사용할 JDBC 라이브러리 : spring-jdbc
+<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-jdbc</artifactId>
+    <version>5.1.1.RELEASE</version>
+</dependency>
+
+
+- C:\Users\User\.m2\repository 에서 스프링에서 다운받은 라이브러리를 확인할 수 있다.
+
+DBCP(DataBase Connection Pool) 라이브러리 - dbcp
+
+오라클 jdbc - http://maven.jahia.org/maven2
+https://devtools.jahia.com/nexus/content/groups/maven-jahia-org/com/oracle/ojdbc6/
+
+<dependency>
+    <groupId>com.oracle</groupId>
+    <artifactId>ojdbc6</artifactId>
+    <version>12.1.0.2</version>
+</dependency>
+
+다운로드할 저장소를 지정한다. (dependencies 밖에 지정해야 됨)
+	<repositories>
+		<repository>
+			<id>maven2_repo</id>
+			<url>http://maven.jahia.org/maven2</url>
+		</repository>
+	</repositories>
+	
+Mybatis 프레임워크를 사용하도록 한다.
+
+Mybatis 라이브러리 - Mybatis
+<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+<dependency>
+    <groupId>org.mybatis</groupId>
+    <artifactId>mybatis</artifactId>
+    <version>3.4.6</version>
+</dependency>
+
+스프링 - mybatis 를 연결하기 위한 라이브러리 : mybatis-spring
+<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
+<dependency>
+    <groupId>org.mybatis</groupId>
+    <artifactId>mybatis-spring</artifactId>
+    <version>1.3.2</version>
+</dependency>
+
+화면의 템플릿을 지정하기 위한 라이브러리 tiles
+
+파일 업로드시 필요한 라이브러리 fileupload
+<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+<dependency>
+    <groupId>commons-fileupload</groupId>
+    <artifactId>commons-fileupload</artifactId>
+    <version>1.4</version>
+</dependency>
+
+타입변환 라이브러리 : databind
+<dependency>
+	    <groupId>com.fasterxml.jackson.core</groupId>
+	    <artifactId>jackson-databind</artifactId>
+	    <version>2.9.9</version>
+</dependency>
+	
+이메일 전송 라이브러리
+<dependency>
+	    <groupId>org.apache.commons</groupId>
+	    <artifactId>commons-email</artifactId>
+	    <version>1.5</version>
+</dependency>
+
+JSON 데이터 파싱 라이브러리
+<dependency>
+	    <groupId>com.googlecode.json-simple</groupId>
+	    <artifactId>json-simple</artifactId>
+	    <version>1.1.1</version>
+</dependency>
+
+
+insert into notice (id, root, title, content, writer)
+select seq_notice.nextval, seq_notice.currval, title, content, writer
+from notice;

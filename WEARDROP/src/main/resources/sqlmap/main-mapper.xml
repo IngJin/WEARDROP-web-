@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="main.mapper">
+
+<select id="id_check" resultType="integer">
+	select count(*) from member2 where userid = #{userid}
+</select>
+
+<insert id="insert">
+	insert into member2(userid, writer, userpw, email, phone)
+	values ( #{userid}, #{writer}, #{userpw}, #{email}, #{phone} )
+</insert>
+
+<select id="login" resultType="main.MainVO">
+	select * from member2 where userid = #{userid} and userpw = #{userpw}
+</select>
+
+<select id="email_login" resultType="main.MainVO">
+	select * from member2 where email = #{email}
+</select>
+
+<select id="email_check" resultType="integer">
+	select count(*) from member2 where email = #{email}
+</select>
+</mapper>

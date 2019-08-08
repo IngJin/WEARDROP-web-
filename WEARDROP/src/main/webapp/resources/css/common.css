@@ -1,0 +1,83 @@
+@charset "UTF-8";
+
+body {
+	margin: 0 auto;
+	text-align: center;
+	font-size: 16px;
+}
+
+table {
+	margin: 0 auto;
+	width: 80%;
+	border: 1px solid;
+	border-collapse: collapse;
+}
+
+table th, table td {
+	border: 1px solid;
+	padding: 5px 10px;
+}
+
+.center {
+	text-align: center;
+}
+
+.left {
+	text-align: left;
+}
+
+.right {
+	text-align: right;
+}
+
+a:hover {
+	cursor: pointer;
+}
+
+.btn-fill, .btn-empty {
+	text-align: center;
+	border: 1px solid #3367d6;
+	border-radius: 3px;
+	padding: 3px 10px;
+	box-shadow: 2px 2px 3px #022d72;
+}
+
+.btn-fill {
+	background-color: #3367d6;
+	color: #ffffff;
+}
+
+.btn-fill-smail {
+	background-color: #e5efff;
+	color: #357ff2;
+	text-align: center;
+	border: 1px solid #c4dafc;
+	border-radius: 3px;
+	padding: 1px 10px;
+	box-shadow: 2px 2px 3px #022d72;
+	font-weight: bold;
+}
+
+.btn-empty {
+	background-color: #ffffff;
+	color: #3367d6;
+}
+
+input[type=text], input[type=password] {
+	height: 22px;
+	padding-left: 5px;
+}
+
+.file-img {
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+}
+
+img {
+	vertical-align: middle;
+}
+
+#attach-file, #delete-file {
+	display: none;
+}
