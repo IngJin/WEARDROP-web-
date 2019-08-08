@@ -1,3 +1,4 @@
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
@@ -6,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인</title>
+<script type="text/javascript" 	src="js/join_check.js?v=<%=new Date().getTime()%>"></script> 
 <script type="text/javascript">
 
 function go_join() {	
@@ -46,12 +48,6 @@ function go_join() {
 		return;
 	}
 	var text = $('#phone').val()
-	var textlength = text.length;
-	if(textlength != 11) {
-		alert('잘못된 휴대폰 번호를 입력하셨습니다.');
-		$('[name=phone]').val('');		
-		return;
-	}
 	
 	$('#from_join').submit();
 	

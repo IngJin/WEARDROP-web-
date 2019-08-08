@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sell.mapper">
+	<insert id="insert">	
+		insert into sell (writer, title, price, content, filename, filepath, code)
+		values (#{writer}, #{title}, #{price}, #{content}, #{filename, jdbcType=VARCHAR}, #{filepath, jdbcType=VARCHAR}, #{code})
+	</insert>
+	
+ <select id="total" resultType="integer">
+	select count(*) from sell<!--  <include refid="search"/> -->
+</select> 
+	
+	<select id="list" resultType="sell.SellVO">
+<!-- select s.*, (select userid from member where id=writer) userid from (select rownum no. s.*)
+			from(select * from sell <include refid="search" /> 
+				order by id) s
+			order by no desc) s
+		where no between #{beginList} and #{endList} -->
+	
+	<!-- select rownum no, c.* from(select * from board1 order by id)c order by no desc -->
+	
+<!-- 후보   select * from (select rownum no, n.* 
+       from (select * from sell <include refid="search"/>) n order by no desc)n   
+       where no between #{beginList} and #{endList} order by no desc -->
+       
+       select * from sell
+       order by id desc   
+      <!--  where no between #{beginList} and #{endList} order by no desc -->
+<!--  	select rownum no, n.*  
+ 	from (select * from sell order by id) n 
+ 	order by no desc -->
+ 	
+	<!-- select * from sell -->
+	
+	<!-- 	select rownum no, s.*
+		from (select * from sell order by id) s -->
+	</select>
+	
+	<!-- click후 조회수 1씩 증가 -->
+	<update id="read">
+	update sell set readcnt = readcnt+1 where id=#{id}
+	</update>
+
+	<select id="detail" resultType="sell.SellVO">
+		select * from sell where id=#{id}
+	</select>
+	
+	<update id="update">
+		update sell set title=#{title}, price=#{price}, content=#{content}, 
+			filename=#{filename, jdbcType=VARCHAR},
+			filepath=#{filepath, jdbcType=VARCHAR}
+			where id=#{id}
+	</update>
+</mapper>

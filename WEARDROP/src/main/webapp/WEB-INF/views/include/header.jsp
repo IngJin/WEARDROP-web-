@@ -2,14 +2,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>   
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<link rel="stylesheet" type="text/css" href="css/common.css?v=<%= new Date().getTime() %>">
-<script type="text/javascript" src="js/common.js"></script>
 <link rel="stylesheet" type="text/css" href="css/menu.css?v=<%= new Date().getTime() %>">
 <link href="https://fonts.googleapis.com/css?family=Darker+Grotesque&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding|Raleway&display=swap" rel="stylesheet">
-<script type="text/javascript" 	src="js/join_check.js?v=<%=new Date().getTime()%>"></script> 
 <style type="text/css">
 </style>
 
@@ -118,7 +114,7 @@ $(function(){
 							<div id="content">
 								<a id="weather" onclick="location='weather.ho'">What should I wear today?</a> <br/><br/>
 								<a id="daliy" onclick="location='index'">DailyLook</a> <br/><br/>
-								<a onclick="location='index'">UsedMarket</a><br/>
+								<a href="list.se">UsedMarket</a><br/>
 								<div class="group">												
 									<div class="box">
 										<div class="title"><a href="#">Service Center</a></div>	
