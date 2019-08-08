@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="center.mapper">
+
+<select id="list" resultType="center.CenterVO">
+	select  n.*, (select name from member where userid = n.writer) 
+	name from (select rownum no, n.* from (select * from center 
+	order by id) n order by no desc) n where no between #{beginList} and #{endList} 
+</select>
+
+<select id="detail" resultType="center.CenterVO"> 
+select n.*, (select name from member where userid = n.writer) name from center n where id = #{id} 
+</select>
+
+<delete id="delete"> 
+delete from center where id = #{id} 
+</delete>
+
+<update id="update"> 
+update center set title = #{title}, content = #{content} where id = #{id}
+ </update>
+
+<select id="listex" resultType="center.exVO">
+	select id, title, writer, content from center
+</select>
+
+
+<insert id="insert">
+		insert into center (id, writer, title, content)
+		values ( #{id}, #{writer}, #{title}, #{content})
+</insert>
+
+<select id="total" resultType="integer">
+	select count(*) from center
+</select>
+
+<insert id="insertex">
+		insert into center (id, writer, title, content)
+		values ( #{id}, #{writer}, #{title}, #{content})
+</insert>
+
+<delete id="deleteex"> 
+delete from center where id = #{id} 
+</delete>
+
+</mapper>

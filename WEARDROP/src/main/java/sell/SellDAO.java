@@ -6,7 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-@Repository("dao")
+@Repository("sellDAO")
 public class SellDAO implements SellService{
 	@Autowired private SqlSession sql;
 	
@@ -43,7 +43,7 @@ public class SellDAO implements SellService{
 		vo.setList(list);
 		System.out.println(list);
 		return vo;
-		// list 값이 안올어올시 sql 문제?
-		// list 값이 들어왓는데 출력이 안될시? 
+		// list 媛믪씠 �븞�삱�뼱�삱�떆 sql 臾몄젣?
+		// list 媛믪씠 �뱾�뼱�솓�뒗�뜲 異쒕젰�씠 �븞�맆�떆? 
 	}
 }

@@ -258,9 +258,8 @@ function go_logout() {
 							
 						<div class="box">
 							<div class="title"><a href="#">Service Center</a></div>	
-							<div class="cont"><a onclick="location='index'">Notice</a></div>
-							<div class="cont"><a onclick="location='index'">Frequently Asked Question</a></div>
-							<div class="cont" id="size"><a onclick="location='index'">Questions and Answer</a></div>
+							<div class="cont"><a href="list.no">Notice</a></div>
+							<div class="cont" id="size"><a href="list.ct">Questions and Answer</a></div>
 						</div>
 		 		
 						<div class="box">
