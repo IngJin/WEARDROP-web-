@@ -118,13 +118,13 @@ $(function(){
 								<div class="group">												
 									<div class="box">
 										<div class="title"><a href="#">Service Center</a></div>	
-										<div class="cont"><a href="list.no">Notice</a></div>
+										<div class="cont" OnClick="location.href ='list.no'" style="cursor:pointer;">Notice</div>
 										<div class="cont" id="size"><a href="list.ct">Questions and Answer</a></div>
 									</div>						 		
 									<div class="box">
 										<div class="title"><a href="#">Community</a></div>	
 										<div class="cont"><a href="list.com">Free Board</a></div>
-										<div class="cont" style="font-size:1.2em;"><a href="list.hu">Reviews</a></div>			
+										<div class="cont" OnClick="location.href ='list.hu'" style="cursor:pointer;">Reviews</div>			
 										<div class="cont"><a href="map.com">Find a store</a></div>
 									</div><br/> <!-- box -->
 								</div> <!-- group -->			 													
