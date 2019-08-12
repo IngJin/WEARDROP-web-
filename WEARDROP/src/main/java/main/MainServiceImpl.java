@@ -3,6 +3,8 @@ package main;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -53,5 +55,16 @@ public class MainServiceImpl implements MainService {
 	public MainVO email_login(HashMap map) {
 		return dao.email_login(map);
 	}
+
+	@Override
+	public MainVO userid_find(String email) {
+		return dao.userid_find(email);
+	}
+
+	@Override
+	public MainVO userpw_find(MainVO vo) {
+		return dao.userpw_find(vo);
+	}
+
 
 }

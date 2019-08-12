@@ -7,8 +7,8 @@
 </select>
 
 <insert id="insert">
-	insert into member2(userid, writer, userpw, email, phone)
-	values ( #{userid}, #{writer}, #{userpw}, #{email}, #{phone} )
+	insert into member2(userid, writer, userpw, email)
+	values ( #{userid}, #{writer}, #{userpw}, #{email})
 </insert>
 
 <select id="login" resultType="main.MainVO">
@@ -17,6 +17,14 @@
 
 <select id="email_login" resultType="main.MainVO">
 	select * from member2 where email = #{email}
+</select>
+
+<select id="userid_find" resultType="main.MainVO">
+	select * from member2 where email = #{email}
+</select>
+
+<select id="userpw_find" resultType="main.MainVO">
+	select * from member2 where userid = #{userid} and email = #{email}
 </select>
 
 <select id="email_check" resultType="integer">

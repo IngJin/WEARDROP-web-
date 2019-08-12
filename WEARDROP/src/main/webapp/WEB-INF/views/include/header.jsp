@@ -135,7 +135,7 @@ $(function(){
                </div>
             </div> <!-- gbnin-->
             <p class="logo">
-               <a onclick="location='index'"><img src="img/temporary.png" class="logo_img" alt="로고" /></a>
+               <a onclick="location='index'"><img src="img/logo.png" class="logo_img" alt="로고" /></a>
             </p>
          </div>
       </div>

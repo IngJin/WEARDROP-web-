@@ -39,50 +39,50 @@
 							success : function(resp) {
 								
 								$('#daliy').hover(function() {
-									$("#myVideo").attr("src", "img/daliy.mp4");
+									$("#myVideo").attr("src", "video/daliy.mp4");
 									$("#myVideo").fadeIn(1000);
 									}, function(){
-										$("#myVideo").attr("src", "img/main.mp4"); 
+										$("#myVideo").attr("src", "video/main.mp4"); 
 										$("#myVideo").fadeIn(1000);
 									});
 																									
 								if((resp.weather[0].main).toString() == "Rain" || (resp.weather[0].main).toString() == "Drizzle" || (resp.weather[0].main).toString() == "Thunderstorm") {
 									$('#weather').hover(function() {
 										$("#myVideo").css("display", "none");
-										$("#myVideo").attr("src", "img/rain2.mp4");
+										$("#myVideo").attr("src", "video/rain2.mp4");
 										$("#myVideo").fadeIn(1000);
 										}, function(){
 											$("#myVideo").css("display", "none");
-											$("#myVideo").attr("src", "img/main.mp4"); 
+											$("#myVideo").attr("src", "video/main.mp4"); 
 											$("#myVideo").fadeIn(1000);
 										});
 								} else if((resp.weather[0].main).toString() == "Snow") {
 									$('#weather').hover(function() {
-										$("#myVideo").attr("src", "img/show.mp4"); 
+										$("#myVideo").attr("src", "video/show.mp4"); 
 										}, function(){
-											$("#myVideo").attr("src", "img/main.mp4"); 
+											$("#myVideo").attr("src", "video/main.mp4"); 
 										});
 								} else if((resp.weather[0].main).toString() == "Clear") {
 									$('#weather').hover(function() {
-										$("#myVideo").attr("src", "img/clear.mp4"); 
+										$("#myVideo").attr("src", "video/clear.mp4"); 
 										}, function(){
-											$("#myVideo").attr("src", "img/main.mp4"); 
+											$("#myVideo").attr("src", "video/main.mp4"); 
 										});
 								} else if((resp.weather[0].main).toString() == "Clouds") {
 									$('#weather').hover(function() {
 										$("#myVideo").css("display", "none");
-										$("#myVideo").attr("src", "img/cloud.mp4");
+										$("#myVideo").attr("src", "video/cloud.mp4");
 										$("#myVideo").fadeIn(1000);
 										}, function(){
 											$("#myVideo").css("display", "none");
-											$("#myVideo").attr("src", "img/main.mp4"); 
+											$("#myVideo").attr("src", "video/main.mp4"); 
 											$("#myVideo").fadeIn(1000);
 										});
 								} else {
 									$('#weather').hover(function() {
-										$("#myVideo").attr("src", "img/mist.mp4"); 
+										$("#myVideo").attr("src", "video/mist.mp4"); 
 										}, function(){
-											$("#myVideo").attr("src", "img/main.mp4"); 
+											$("#myVideo").attr("src", "video/main.mp4"); 
 										});
 								}
 								
@@ -241,13 +241,13 @@ function go_logout() {
 </head>
 <body>
 <video autoplay muted loop id="myVideo">
-      <source src="img/main.mp4" type="video/mp4">
+      <source src="video/main.mp4" type="video/mp4">
 </video>
 	<div class="out">
 		<div class="content">
 			
 		<div id ="floater">
-			<a onclick="location='index'"><img src="img/temporary.png" alt="로고" /></a>
+			<a onclick="location='index'"><img src="img/logo.png" alt="로고" style=" width: 280px; height: auto"/></a>
 		</div>
 			
 			<div id="content">

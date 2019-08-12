@@ -8,8 +8,8 @@
 <meta charset="UTF-8">
 <title>로그인</title>
 <script type="text/javascript" 	src="js/join_check.js?v=<%=new Date().getTime()%>"></script> 
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <script type="text/javascript">
-
 function go_join() {	
 
 	// 중복확인 하지 않은 경우
@@ -42,15 +42,14 @@ function go_join() {
 	if ( !item_check('userpw_ck') ) { return; }
 	if ( !item_check('email') ) { return; }
 	
-	if($('[name=phone]').val().trim() === '' ) {
-		alert('휴대전화 번호를 입력하세요.');
-		$('[name=phone]').val('');		
+	
+	
+	if(!($('input:checkbox[name="terms"]').is(":checked"))) {
+		alert('이용약관에 동의해주세요.');
 		return;
 	}
-	var text = $('#phone').val()
 	
 	$('#from_join').submit();
-	
 }
 
 function item_check(item) {	
@@ -129,11 +128,27 @@ function go_login(){
 		}
 	});
 }
+
+function terms() { 
+	window.open("terms.ho", "a", "width=1000, height=800, left=100, top=50"); 
+}
+
+function userid_find() {
+	window.open("userid_find.ho", "a", "width=500, height=200, left=100, top=50"); 
+}
+
+function userpw_find() {
+	window.open("userpw_find.ho", "a", "width=500, height=300, left=100, top=50"); 
+}
 </script>
+<style type="text/css">
+.tre {
+	font-size: 0.9em;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+</style>
 </head>
-
 <body>
-
 	  <div class="join">
 		  <div class="login">
 		 	<h1 class="login_h1">Login</h1>
@@ -143,6 +158,7 @@ function go_login(){
 				<div class="login_font">PassWord</div></br>
 				<input class="login_list" type="password" id="Logindpwd"/><br/><br/>
 			</span>	
+			<div class="tre" style="margin-left: 350px;"> <a href="javascript:void(0);" onclick="userid_find()">아이디 찾기</a> / <a href="javascript:void(0);" onclick="userpw_find()">비밀번호 찾기</a> </div><br/> 
 			<div class="btn_div">
 				<a class="btn" onclick="go_login()">Login</a>
 				<a class="btn" href="https://kauth.kakao.com/oauth/authorize?client_id=47035dbae45dcf3a446b494c2294ae92&redirect_uri=http://192.168.0.67/iot/kakaologin&response_type=code">Kakao</a>
@@ -171,11 +187,8 @@ function go_login(){
 					<div class="login_font">Email</div>
 					<input class="login_list" type="email" id="email" name="email" onkeyup="validate('email')"/><br/>
 					<div class="valid" id="email_status">이메일을 입력하세요</div><br/>
-					<div class="login_font">Phone</div>
-					<input type="text" id="phone" name="phone" size="4" maxlength="3" /> -
-					<input type="text" id="phone"  name="phone" size="4" maxlength="4" /> - 
-					<input type="text" id="phone"  name="phone" size="4" maxlength="4" /><br/><br/>
-			</span>	
+			</span><br/>	
+			<div class="tre"><input type="checkbox" name="terms" style="width:15px;height:15px;"> 본 서비스 <a href="javascript:void(0);" onclick="terms()" style="text-decoration:underline;">이용약관</a>에 동의합니다.</div><br/>
 			<div class="btn_div">
 				<a class="btn" onclick="go_join()">Register</a>
 			</div>

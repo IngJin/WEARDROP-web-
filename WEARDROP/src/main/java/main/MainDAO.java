@@ -3,6 +3,8 @@ package main;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -53,5 +55,16 @@ public class MainDAO implements MainService {
 	public MainVO email_login(HashMap map) {
 		return sql.selectOne("main.mapper.email_login", map);
 	}
+
+	@Override
+	public MainVO userid_find(String email) {
+		return sql.selectOne("main.mapper.userid_find", email);
+	}
+
+	@Override
+	public MainVO userpw_find(MainVO vo) {
+		return sql.selectOne("main.mapper.userpw_find", vo);
+	}
+
 
 }
