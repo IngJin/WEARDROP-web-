@@ -92,9 +92,9 @@ a {text-decoration:none; color:#000000;}
 
 .display {
 	height:100%;
-	width: 822px;
+	width: 815px;
 	float: left;
-	margin-left: 1097px;
+	margin-left: 1100px;
 	background-size: cover;
 }
 .temp {
@@ -170,6 +170,7 @@ function weather() {
 								var html = ""											
 								html += "<div class='temp'>" + (resp.main.temp - 273.15) + "˚</div>";
 								html +=   "<div class='wet'>" + resp.weather[0].main + " / " + resp.name + "</div>";
+								
 								if((resp.weather[0].main).toString() == "Rain" || (resp.weather[0].main).toString() == "Drizzle" || (resp.weather[0].main).toString() == "Thunderstorm") {
 									$(".we_img").css("background-image", 'url("img/we_rain.png")');
 								} else if((resp.weather[0].main).toString() == "Snow") {
@@ -199,7 +200,11 @@ function weather() {
 								} else {
 									html += "<div class='tocody'>Today is Cody</div><div class='tocodys'>겨울 옷(야상, 패딩, 목도리 등등 다)</div>"										
 								}
+								$("#display").css("display", "none");
 								$("#display").append(html);
+								$("#display").fadeIn(1000);
+								$(".we_img").css("display", "none");
+								$(".we_img").fadeIn(1000); 
 							}
 						})
 					}
@@ -248,9 +253,13 @@ function weather() {
 										$("#myVideo").attr("src", "video/rain2.mp4");
 										$("#myVideo").fadeIn(1000); 
 										if((resp.main.temp - 273.15) > 18) { 
+											$(".display").css("display", "none");
 											$(".display").css('background-image', 'url("img/weather_hot.jpg")');
+											$(".display").fadeIn(1000); 
 										} else {
+											$(".display").css("display", "none");
 											$(".display").css('background-image', 'url("img/weather_cold.jpg")');
+											$(".display").fadeIn(1000); 
 										}
 										}, function(){
 											$("#myVideo").css("display", "none");
@@ -266,9 +275,13 @@ function weather() {
 										$("#myVideo").attr("src", "video/show.mp4");
 										$("#myVideo").fadeIn(1000); 
 										if((resp.main.temp - 273.15) > 18) {
+											$(".display").css("display", "none");
 											$(".display").css('background-image', 'url("img/weather_hot.jpg")');
+											$(".display").fadeIn(1000); 
 										} else {
+											$(".display").css("display", "none");
 											$(".display").css('background-image', 'url("img/weather_cold.jpg")');
+											$(".display").fadeIn(1000); 
 										}
 										}, function(){
 											$("#myVideo").css("display", "none");
@@ -285,9 +298,13 @@ function weather() {
 										$("#myVideo").attr("src", "video/clear.mp4");
 										$("#myVideo").fadeIn(1000); 
 										if((resp.main.temp - 273.15) > 18) {
+											$(".display").css("display", "none");
 											$(".display").css('background-image', 'url("img/weather_hot.jpg")');
+											$(".display").fadeIn(1000); 
 										} else {
+											$(".display").css("display", "none");
 											$(".display").css('background-image', 'url("img/weather_cold.jpg")');
+											$(".display").fadeIn(1000); 
 										}
 										}, function(){
 											$("#myVideo").css("display", "none");
@@ -304,9 +321,13 @@ function weather() {
 										$("#myVideo").attr("src", "video/cloud.mp4");
 										$("#myVideo").fadeIn(1000); 
 										if((resp.main.temp - 273.15) > 18) {
+											$(".display").css("display", "none");
 											$(".display").css('background-image', 'url("img/weather_hot.jpg")');
+											$(".display").fadeIn(1000); 
 										} else {
+											$(".display").css("display", "none");
 											$(".display").css('background-image', 'url("img/weather_cold.jpg")');
+											$(".display").fadeIn(1000); 
 										}
 										}, function(){
 											$("#myVideo").css("display", "none");
@@ -323,9 +344,13 @@ function weather() {
 										$("#myVideo").attr("src", "video/mist.mp4");
 										$("#myVideo").fadeIn(1000); 
 										if((resp.main.temp - 273.15) > 18) {
+											$(".display").css("display", "none");
 											$(".display").css('background-image', 'url("img/weather_hot.jpg")');
+											$(".display").fadeIn(1000); 
 										} else {
+											$(".display").css("display", "none");
 											$(".display").css('background-image', 'url("img/weather_cold.jpg")');
+											$(".display").fadeIn(1000); 
 										}
 										}, function(){
 											$("#myVideo").css("display", "none");
