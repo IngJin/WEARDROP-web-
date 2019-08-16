@@ -9,16 +9,8 @@
 <style type="text/css">
 .login {
 	margin-top: 280px;
+	margin-left: 8px; 	
 }
-
-.login_login {
-	margin-left: 27px;
-	font-family: 'Raleway', sans-serif;
-	color: #4F4F4D;
-	font-size: 1.1em;
-}
-
-
 </style>
 
 <script type="text/javascript">
@@ -160,7 +152,7 @@ $(function(){
 						<a class="btn" onclick="go_logout()">Logout</a>
 						</c:if>
 						<c:if test="${ empty info_login}">
-							<a class="btn" class="login_login" onclick="location='login.ho'">Login</a>	
+							<a class="btn" onclick="location='login.ho'">Login</a>	
 						</c:if>	
 					</div>
                   </ul>        

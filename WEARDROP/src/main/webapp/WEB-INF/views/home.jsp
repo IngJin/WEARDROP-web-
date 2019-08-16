@@ -170,6 +170,18 @@ function weather() {
 								var html = ""											
 								html += "<div class='temp'>" + (resp.main.temp - 273.15) + "˚</div>";
 								html +=   "<div class='wet'>" + resp.weather[0].main + " / " + resp.name + "</div>";
+								if((resp.weather[0].main).toString() == "Rain" || (resp.weather[0].main).toString() == "Drizzle" || (resp.weather[0].main).toString() == "Thunderstorm") {
+									$(".we_img").css("background-image", 'url("img/we_rain.png")');
+								} else if((resp.weather[0].main).toString() == "Snow") {
+									$(".we_img").css("background-image", 'url("img/we_show.png")');
+								} else if((resp.weather[0].main).toString() == "Clear") {
+									$(".we_img").css("background-image", 'url("img/we_sun.png")');
+								} else if((resp.weather[0].main).toString() == "Clouds") {
+									$(".we_img").css("background-image", 'url("img/we_cloud.png")');
+								} else {
+									$(".we_img").css("background-image", 'url("img/we_mist.png")'); 
+								}
+								
 								if((resp.main.temp - 273.15) >= 27) {
 									html += "<div class='tocody'>Today is Cody</div><div class='tocodys'>나시티, 반바지, 민소매, 원피스</div>"	
 								} else if((resp.main.temp - 273.15) >= 23) {
@@ -231,11 +243,10 @@ function weather() {
 																									
 								if((resp.weather[0].main).toString() == "Rain" || (resp.weather[0].main).toString() == "Drizzle" || (resp.weather[0].main).toString() == "Thunderstorm") {
 									$('#weather').hover(function() {
+										weather();
 										$("#myVideo").css("display", "none");
 										$("#myVideo").attr("src", "video/rain2.mp4");
 										$("#myVideo").fadeIn(1000); 
-										$(".we_img").css("background-image", 'url("img/we_rain.png")');
-										weather();
 										if((resp.main.temp - 273.15) > 18) { 
 											$(".display").css('background-image', 'url("img/weather_hot.jpg")');
 										} else {
@@ -250,11 +261,10 @@ function weather() {
 										});
 								} else if((resp.weather[0].main).toString() == "Snow") {
 									$('#weather').hover(function() {
+										weather();
 										$("#myVideo").css("display", "none");
 										$("#myVideo").attr("src", "video/show.mp4");
 										$("#myVideo").fadeIn(1000); 
-										$(".we_img").css("background-image", 'url("img/we_show.png")');
-										weather();
 										if((resp.main.temp - 273.15) > 18) {
 											$(".display").css('background-image', 'url("img/weather_hot.jpg")');
 										} else {
@@ -270,11 +280,10 @@ function weather() {
 										});
 								} else if((resp.weather[0].main).toString() == "Clear") {
 									$('#weather').hover(function() {
+										weather();
 										$("#myVideo").css("display", "none");
 										$("#myVideo").attr("src", "video/clear.mp4");
 										$("#myVideo").fadeIn(1000); 
-										$(".we_img").css("background-image", 'url("img/we_sun.png")');
-										weather();
 										if((resp.main.temp - 273.15) > 18) {
 											$(".display").css('background-image', 'url("img/weather_hot.jpg")');
 										} else {
@@ -290,11 +299,10 @@ function weather() {
 										});
 								} else if((resp.weather[0].main).toString() == "Clouds") {
 									$('#weather').hover(function() {
+										weather(); 
 										$("#myVideo").css("display", "none");
 										$("#myVideo").attr("src", "video/cloud.mp4");
 										$("#myVideo").fadeIn(1000); 
-										$(".we_img").css("background-image", 'url("img/we_cloud.png")');
-										weather(); 
 										if((resp.main.temp - 273.15) > 18) {
 											$(".display").css('background-image', 'url("img/weather_hot.jpg")');
 										} else {
@@ -310,11 +318,10 @@ function weather() {
 										});
 								} else {
 									$('#weather').hover(function() {
+										weather();
 										$("#myVideo").css("display", "none");
 										$("#myVideo").attr("src", "video/mist.mp4");
 										$("#myVideo").fadeIn(1000); 
-										$(".we_img").css("background-image", 'url("img/we_mist.png")'); 
-										weather();
 										if((resp.main.temp - 273.15) > 18) {
 											$(".display").css('background-image', 'url("img/weather_hot.jpg")');
 										} else {
