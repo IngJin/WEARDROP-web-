@@ -160,7 +160,7 @@ $(function(){
 						<a class="btn" onclick="go_logout()">Logout</a>
 						</c:if>
 						<c:if test="${ empty info_login}">
-							<a class="login_login" onclick="location='login.ho'">Login</a>	
+							<a class="btn" class="login_login" onclick="location='login.ho'">Login</a>	
 						</c:if>	
 					</div>
                   </ul>        

@@ -38,7 +38,7 @@
 #floater {
 	width: 100%;
 	height: 25%;
-	margin-top: 40px;
+	margin-top: 80px;
 	margin-bottom: -100px;
 }
 
@@ -449,7 +449,7 @@ function go_logout() {
 					<a class="btn" onclick="go_logout()">Logout</a>
 				</c:if>
 				<c:if test="${ empty info_login}">
-					<a onclick="location='login.ho'">Login</a>	
+					<a class="btn" onclick="location='login.ho'">Login</a>	
 				</c:if>	
 			</div>
 		</div>
