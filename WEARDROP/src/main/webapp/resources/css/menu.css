@@ -14,7 +14,7 @@ html, body {
 	width: 100%;
 	height: 100%; 
 	font-family: 'Darker Grotesque', sans-serif;
-	margin-top: -200px;
+	margin-top: -42px;
 	font-size: 1.3em;
 }
 
@@ -28,6 +28,7 @@ html, body {
 	clear: both;
 	height: 240px;
 	position: relative;
+	margin-top: 300px;
 }
 .service-over, .service-over2 {
 	display: none;
@@ -184,12 +185,13 @@ body.ofH {
 .header a.all-menu span {
 	display: block;
 	position: absolute;
-	left: 12px;
+	left: 18px;
 	width: 24px;
 	height: 1px;
 	background: #000;
 	-webkit-transition-duration: .4s;
 	transition-duration: .4s;
+	
 }
 
 /* 이게 햄버거 */
@@ -225,6 +227,10 @@ body.ofH {
 .header .fixmenu.active .plus {
 	opacity: 0;
 	filter: alpha(opacity = 0);
+}
+
+.header .fixmenu.active {
+	width: 90px;
 }
 
 .header .fixmenu .plus span {
@@ -285,6 +291,9 @@ body.ofH {
 	transform: translateX(0);
 }
 
+.header .grid {
+	margin-top: -18px;	
+}
 .header .gnbIn {
 	overflow: hidden;
 	overflow-y: auto;
@@ -292,8 +301,7 @@ body.ofH {
 	left: 0;
 	width: 175px;
 	height: 100%;
-	padding-top: 80px;
-	padding-bottom: 80px;
+	padding-bottom: 90px;
 	margin-left: -90px;	
 	text-align: left;
 	-webkit-box-sizing: border-box;
@@ -303,12 +311,6 @@ body.ofH {
 	box-sizing: border-box;
 }
 
-.header .gnbIn:before {
-	content: '';
-	display: inline-block;
-	height: 40%;
-	vertical-align: middle;
-}
 
 .header .gnbIn>div {
 	display: inline-block;

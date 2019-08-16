@@ -7,9 +7,33 @@
 <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding|Raleway&display=swap" rel="stylesheet">
 <style type="text/css">
+.login {
+	margin-top: 280px;
+}
+
+.login_login {
+	margin-left: 27px;
+	font-family: 'Raleway', sans-serif;
+	color: #4F4F4D;
+	font-size: 1.1em;
+}
+
+
 </style>
 
 <script type="text/javascript">
+
+function go_logout() {
+	$.ajax({
+		url : 'logout_log',
+		success: function() {
+			location='index';
+		}, error: function(req, text) {
+			alert( txt + ": " + req.status);
+		}
+	});
+}
+
 $(function(){
 
     var group = $(".group");
@@ -107,14 +131,13 @@ $(function(){
          </div>
          <div class="gnbwrap">
             <div class="gnbIn">
-               <div>
+               <div class="grid">
                   <ul id="gnb">
                     <div class="out">
 						<div class="content">			 											
 							<div id="content">
-								<a id="weather" onclick="location='weather.ho'">What should I wear today?</a> <br/><br/>
 								<a id="daliy" href="list.gal">DailyLook</a> <br/><br/>
-								<a href="list.se">UsedMarket</a><br/>
+								<a href="list.se">UsedMarket</a><br/>	
 								<div class="group">												
 									<div class="box">
 										<div class="title"><a href="#">Service Center</a></div>	
@@ -131,6 +154,15 @@ $(function(){
 							</div>	<!-- contnet id -->
 						</div> <!-- content cl -->
 					</div> <!-- out -->
+					<div class="login">
+						<c:if test="${ !empty info_login}">
+						<div class="user_info">${info_login.userid} [${info_login.writer}]</div><br/>
+						<a class="btn" onclick="go_logout()">Logout</a>
+						</c:if>
+						<c:if test="${ empty info_login}">
+							<a class="login_login" onclick="location='login.ho'">Login</a>	
+						</c:if>	
+					</div>
                   </ul>        
                </div>
             </div> <!-- gbnin-->

@@ -43,12 +43,11 @@
 	<div id="contents-holder">
 		<div id="contents">
 			<div id="errornum">
-								<span id="error-h">5</span><span class="error-sep">:</span><span id="error-m">00</span><span class="error-sep">:</span><span id="error-s">00</span>
+			<span id="error-h">5</span><span class="error-sep">:</span><span id="error-m">00</span><span class="error-sep">:</span><span id="error-s">00</span>
 			</div>
 			
 			<h2 id="title">Internal Server Error</h2>
-		<p id="body">실망하셨습니까? <br> 이건 당신이 초래한 업보입니다.</p>
-			
+			<p id="body">서버에 오류가 발생하였습니다.<br>불편을 드려서 죄송합니다.</p>			
 			<div id="back-to-index">
 				<p><a href="/iot/index" rel="homepage">메인으로</a></p>
 			</div>

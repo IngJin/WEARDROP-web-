@@ -47,7 +47,7 @@
 			</div>
 			
 			<h2 id="title">Page not found</h2>
-		<p id="body">실망하셨습니까? <br> 이건 당신이 초래한 업보입니다.</p>
+		<p id="body">페이지를 찾을 수 없습니다.<br>불편을 드려서 죄송합니다.</p>
 			
 			<div id="back-to-index">
 				<p><a href="/iot/index" rel="homepage">메인으로</a></p>

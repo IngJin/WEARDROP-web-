@@ -36,12 +36,6 @@ public class MainController {
 		model.addAttribute("category", "");
 		return "home";
 	}
-
-	// 날씨 페이지(삭제 예정)
-	@RequestMapping("/weather.ho")
-	public String weather() {
-		return "main/weather";
-	}
 	
 	// 약관 페이지 호출
 	@RequestMapping("/terms.ho")
