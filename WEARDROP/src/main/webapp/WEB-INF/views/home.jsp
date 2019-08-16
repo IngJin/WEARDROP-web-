@@ -94,7 +94,7 @@ a {text-decoration:none; color:#000000;}
 	height:100%;
 	width: 815px;
 	float: left;
-	margin-left: 1100px;
+	margin-left: 1105px;
 	background-size: cover;
 }
 .temp {
