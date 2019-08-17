@@ -12,7 +12,7 @@
 <script type="text/javascript">
 function go_join() {	
 
-	// 중복확인 하지 않은 경우
+	// 아이디 중복확인 하지 않은 경우
 	if ($('#id_check').val() === 'n') {
 		if ( !item_check('userid') ) { return; }
 		else {
@@ -22,7 +22,7 @@ function go_join() {
 			return;
 		}
 	} else if( $('#id_check').val() === 'unusable' ) {
-	// 중복확인 한 경우 : usable/usable
+	// 아이디 중복확인 한 경우 : usable/usable
 		alert( join.id.unusable.desc );	
 		// $('[name=userid]').val('');
 		$('[name=userid]').focus();
@@ -40,9 +40,22 @@ function go_join() {
 	// 회원가입할 수 있으므로 유효성부터 판단.
 	if ( !item_check('userpw') ) { return; }
 	if ( !item_check('userpw_ck') ) { return; }
-	if ( !item_check('email') ) { return; }
-	
-	
+		
+	// 이메일 중복확인 하지 않은 경우
+	if ($('#email_check').val() === 'n') {
+		if ( !item_check('email') ) { return; }
+		else {
+			// 중복확인 하도록 유도
+			alert( join.email.valid.desc );
+			$('#btn-email').focus();
+			return;
+		}
+	} else if( $('#email_check').val() === 'unusable' ) {
+	// 이메일 중복확인 한 경우 : usable/usable
+		alert( join.email.unusable.desc );	
+		$('[name=email]').focus();
+		return;
+	}
 	
 	if(!($('input:checkbox[name="terms"]').is(":checked"))) {
 		alert('이용약관에 동의해주세요.');
@@ -80,6 +93,33 @@ function usable(){
 			$('#userid_status').addClass( 
 					result.code==='usable' ? 'valid' : 'invalid' );
 			$('#id_check').val( result.code );
+		},
+		error: function(req, text){
+			alert(text + ": "+req.status);
+		}
+	});	
+}
+
+
+function usable_email(){
+	// DB에 해당 이메일로 가입한 회원이 있는지의 여부를 판단
+	var result = validate('email');
+	if( result.code !== 'valid' ){
+		alert( result.desc );
+		return;
+	}
+	$.ajax({	
+		type: 'post',
+		url: 'email_check_main',
+		data: { email : $('[name=email]').val() },
+		success: function(data){
+			var result = join.email_usable(data);
+			$('#email_status').text(result.desc);
+			$('#email_status').removeClass('valid invalid');
+			//usable -> valid, unusable -> invalid
+			$('#email_status').addClass( 
+					result.code==='usable' ? 'valid' : 'invalid' );
+			$('#email_check').val( result.code );
 		},
 		error: function(req, text){
 			alert(text + ": "+req.status);
@@ -169,6 +209,7 @@ function userpw_find() {
 	  <div class="join2">
    	<form method="post" action="join_log" id="from_join">
 		 <input type="hidden" id="id_check" value="n">
+		  <input type="hidden" id="email_check" value="n">		 
 		  <div class="login2">
 		 	<h1 class="login_h1">Register</h1>
 			<span>
@@ -185,8 +226,10 @@ function userpw_find() {
 					<input class="login_list" type="password" id="userpw_check" name="userpw_ck" onkeyup="validate('userpw_ck')"/><br/>
 					<div class="valid" id="userpw_ck_status">비밀번호를 다시 입력하세요.</div><br/>				
 					<div class="login_font">Email</div>
-					<input class="login_list" type="email" id="email" name="email" onkeyup="validate('email')"/><br/>
+					<input class="login_list" type="email" id="email" name="email" onkeyup="$('#email_check').val('n'); validate('email')"/>
+					<input class="login_button" id="btn-email" type="button" value="Duplicate" onclick="usable_email()"/><br/>
 					<div class="valid" id="email_status">이메일을 입력하세요</div><br/>
+					<br/>					
 			</span><br/>	
 			<div class="tre"><input type="checkbox" name="terms" style="width:15px;height:15px;"> 본 서비스 <a href="javascript:void(0);" onclick="terms()" style="text-decoration:underline;">이용약관</a>에 동의합니다.</div><br/>
 			<div class="btn_div">

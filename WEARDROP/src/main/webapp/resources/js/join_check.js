@@ -19,20 +19,18 @@ var join = {
 		notequal: { code:'invalid', desc:'비밀번호가 일치하지 않습니다'}
 	},
 	email:{
-		valid: { code:'valid', desc:'유효한 이메일입니다.' },
+		valid: { code:'valid', desc:'이메일 중복확인하세요.' },
 		invalid: { code:'invalid', desc:'유효하지 않은 이메일입니다.' },
+		usable: { code:'usable', desc:'사용가능한 이메일입니다'},
+		unusable: { code:'unusable', desc:'이미 사용중인 이메일입니다'},
 	},	
 	id_usable: function(usable){
 		if( usable === 'true' ) { return this.id.usable; }
 		else { return this.id.unusable;}
 	},	
-	email_status: function(email){
-		var space = /\s/g;
-		var reg = /^[_\.0-9a-zA-Z-]+@([0-9a-zA-Z][0-9a-zA-Z-]+\.)+[a-zA-Z]{2,6}$/i;
-		if(email === '')	{ return this.common.empty; }
-		else if( email.match(space) ) { return this.common.space; }
-		else if( !reg.test(email) )	 { return this.email.invalid; }
-		else { return this.email.valid; }
+	email_usable: function(usable){
+		if( usable === 'true' ) { return this.email.usable; }
+		else { return this.email.unusable;}
 	},	
 	pw_ck_status: function(pw_ck, pw){
 		if( pw_ck === '' ) { return this.common.empty; }
@@ -60,6 +58,14 @@ var join = {
 		else if( id.length < 5 ) { return this.common.min; }
 		else if( id.length > 10 ) { return this.common.max; }
 		else { return this.id.valid; }
+	},
+	email_status: function(email){
+		var space = /\s/g;
+		var reg = /^[_\.0-9a-zA-Z-]+@([0-9a-zA-Z][0-9a-zA-Z-]+\.)+[a-zA-Z]{2,6}$/i;
+		if(email === '')	{ return this.common.empty; }
+		else if( email.match(space) ) { return this.common.space; }
+		else if( !reg.test(email) )	 { return this.email.invalid; }
+		else { return this.email.valid; }
 	}
 		
 }

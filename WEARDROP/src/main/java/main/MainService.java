@@ -17,4 +17,5 @@ public interface MainService {
 	boolean email_check(String email); 	// 아이디 중복확인
 	MainVO userid_find(String email);		// 아이디 찾기
 	MainVO userpw_find(MainVO vo);			// 비밀번호 찾기
+		
 }

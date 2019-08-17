@@ -65,6 +65,4 @@ public class MainDAO implements MainService {
 	public MainVO userpw_find(MainVO vo) {
 		return sql.selectOne("main.mapper.userpw_find", vo);
 	}
-
-
 }

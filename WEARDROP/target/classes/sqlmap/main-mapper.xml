@@ -30,4 +30,9 @@
 <select id="email_check" resultType="integer">
 	select count(*) from member2 where email = #{email}
 </select>
+
+<insert id="kakao_insert">
+	insert into member2(userid, writer, email, userpw)
+	values ( #{userid}, #{writer}, #{email}, #{userpw} )
+</insert>
 </mapper>

@@ -2,6 +2,7 @@ package com.hanul.iot;
 
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 
@@ -26,7 +27,7 @@ public class MainController {
 	@Autowired
 	private MainServiceImpl service;
 	@Autowired
-	private MainEmailServiceImpl emailService;	
+	private MainEmailServiceImpl emailService;
 	@Autowired
 	private KakaoAPI kakao;
 
@@ -36,24 +37,24 @@ public class MainController {
 		model.addAttribute("category", "");
 		return "home";
 	}
-	
+
 	// 약관 페이지 호출
 	@RequestMapping("/terms.ho")
 	public String terms() {
 		return "terms";
-	}	
-	
+	}
+
 	// 아이디 찾기 페이지 호출
 	@RequestMapping("/userid_find.ho")
 	public String userid_find() {
 		return "userid_find";
-	}	
-	
+	}
+
 	// 비밀번호 찾기 페이지 호출
 	@RequestMapping("/userpw_find.ho")
 	public String userpw_find() {
 		return "userpw_find";
-	}	
+	}
 
 	// 로그인 페이지 호출
 	@RequestMapping("/login.ho")
@@ -107,30 +108,40 @@ public class MainController {
 	public String id_check(String userid) {
 		// DB에 입력된 아이디가 있는지의 여부 판단
 		return String.valueOf(service.id_check(userid));
-	}	
+	}
 	
+	// 이메일 중복확인 요청
+		@ResponseBody
+		@RequestMapping("/email_check_main")
+		public String email_check(String email) {
+			// DB에 입력된 아이디가 있는지의 여부 판단
+			return String.valueOf(service.email_check(email));
+		}
+
 	// 아이디 찾기
-	@ResponseBody @RequestMapping(value="/userid_find")
+	@ResponseBody
+	@RequestMapping(value = "/userid_find")
 	public MainVO userid_find(String email) {
 		// DB에 입력된 이메일이 있는지의 여부 판단
 		MainVO check = service.userid_find(email);
-		return check;		
+		return check;
 	}
-	
+
 	// 비밀번호 찾기
-	@ResponseBody @RequestMapping(value="/userpw_find")
+	@ResponseBody
+	@RequestMapping(value = "/userpw_find")
 	public MainVO userpw_find(String userid, String email) {
 		// DB에 입력된 이메일이 있는지의 여부 판단
 		MainVO vo = new MainVO();
 		vo.setUserid(userid);
 		vo.setEmail(email);
 		MainVO check = service.userpw_find(vo);
-		if(check != null) {
+		if (check != null) {
 			emailService.emailSend(check);
 		}
-		return check;		
+		return check;
 	}
-			
+
 	// 카카오톡 로그인
 	@RequestMapping(value = "/kakaologin")
 	public String kakaologin(@RequestParam("code") String code, HttpSession session) {
@@ -158,10 +169,26 @@ public class MainController {
 				vo.setEmail(email);
 				vo.setUserid(userid);
 				vo.setWriter(writer);
+				
+				String userpw = randomValue(10);
+				vo.setUserpw(userpw);
+				
+				service.insert(vo);
 				session.setAttribute("info_login", vo);
 				session.setAttribute("access_Token", access_Token);
 			}
 		}
 		return "home";
 	}
+
+	// 랜덤 비밀번호 생성기(10자리)
+	public static String randomValue(int cnt) {
+		StringBuffer strPwd = new StringBuffer();
+		char str[] = new char[1];
+		for (int i = 0; i < cnt; i++) {
+			str[0] = (char) ((Math.random() * 94) + 33);
+			strPwd.append(str);
+		}
+		return strPwd.toString();
+	}    
 }
