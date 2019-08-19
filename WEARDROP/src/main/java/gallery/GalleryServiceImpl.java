@@ -66,4 +66,10 @@ public class GalleryServiceImpl implements GalleryService {
 	public List<GalleryVO> andlist() {
 		return dao.andlist();
 	}
+	
+	//0816
+	@Override
+	public GalleryPage list(GalleryPage vo) {
+		return dao.list(vo);
+	}
 }

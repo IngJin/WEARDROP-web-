@@ -84,6 +84,7 @@ a {text-decoration:none; color:#000000;}
 	height: 100%;
 	margin-top: 10%;
 }
+
 input[type=text], input[type=password], input[type=email] {
 	height: 35px;
 	border: hidden;
@@ -368,4 +369,16 @@ body.ofH {
     color: #F1F1F1;
     padding: 4px 10px;
     border-radius: 13px;
+}
+a:hover {
+	color: #fff
+}
+
+a, a:hover, .pic .pic-image, .pic-caption, .pic:hover .pic-caption, .pic:hover img
+	{
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	-ms-transition: all 0.5s ease;
+	transition: all 0.5s ease
 }

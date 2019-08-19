@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+
 @Repository
 public class GalleryDAO implements GalleryService {
 
@@ -56,7 +57,7 @@ public class GalleryDAO implements GalleryService {
 
 	@Override
 	public boolean update(GalleryVO vo) {
-		return sql.update("gallery.mapper.update", vo) > 0 ? true : false;// boolean Å¸ÀÔÀÌ±â ¶§¹®
+		return sql.update("gallery.mapper.update", vo) > 0 ? true : false;// boolean Å¸ï¿½ï¿½ï¿½Ì±ï¿½ ï¿½ï¿½ï¿½ï¿½
 	}
 
 	@Override
@@ -67,5 +68,13 @@ public class GalleryDAO implements GalleryService {
 	@Override
 	public List<GalleryVO> andlist() {
 		return sql.selectList("gallery.mapper.andlist");
+	}
+	
+	@Override
+	public GalleryPage list(GalleryPage vo) {
+		vo.setTotalList((Integer)sql.selectOne("gallery.mapper.total", vo));
+		List<GalleryVO> list = sql.selectList("gallery.mapper.list",vo);
+		vo.setList(list);
+		return vo;
 	}
 }

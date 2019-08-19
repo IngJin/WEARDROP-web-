@@ -20,27 +20,27 @@ div {
     display: block;
 }
 
-#wrap #contents{
+#wraps #contents{
 	margin-left: 175px;
 	height: 100%;
 }
 
-#wrap #contents .leftside {
+#wraps #contents .leftside {
     width: 50%;
     height: 100%;
     position: absolute;
     top: 0;
 }
 
-#wrap #contents .leftpix {
+#wraps #contents .leftpix {
     left: 0;
 }
 
-#wrap #contents .leftside .snapsPhoto {
+#wraps #contents .leftside .snapsPhoto {
     background-color: #0000ff;
 }
 
-#wrap #contents .leftside .item {
+#wraps #contents .leftside .item {
     width: 100%;
     height: 0;
     position: absolute;
@@ -48,11 +48,11 @@ div {
     left: 0;
 }
 
-#wrap #contents .leftside .snapsPhoto .item .img {
+#wraps #contents .leftside .snapsPhoto .item .img {
     background-color: #0000ff;
 }
 
-#wrap #contents .leftside .item .img {
+#wraps #contents .leftside .item .img {
 	margin-left:175px;
     position: absolute;
     top: 0;
@@ -64,7 +64,7 @@ div {
     background-color: #edff00;
 }
 
-#wrap #contents .leftside .item .img .photo {
+#wraps #contents .leftside .item .img .photo {
     position: relative;
     top: 0;
     left: 0;
@@ -81,11 +81,11 @@ div {
 
 
 /* 우측 */
-#wrap #contents .ootdDetail {
+#wraps #contents .ootdDetail {
     overflow: hidden;
 }
 
-#wrap #contents .rightside {
+#wraps #contents .rightside {
     width: 50%;
     height: 100%;
     position: absolute;
@@ -93,16 +93,16 @@ div {
     background-color: #fff;
 }
 
-#wrap #contents .rightpix {
+#wraps #contents .rightpix {
     right: 0;
 }
 
 
-#wrap #contents .rightside .rs_body {
+#wraps #contents .rightside .rs_body {
     padding: 20px 20px 10px 20px;
 }
 
-#wrap #contents .rightside .rs_body .rs_textarea {
+#wraps #contents .rightside .rs_body .rs_textarea {
     margin-bottom: 10px;
 }
 
@@ -143,7 +143,8 @@ $(document).mousedown(function(e) {
 </script>
 </head>
 <body oncontextmenu='return false' onselectstart='return false' ondragstart='return false'>
-<div id="wrap">
+
+<div id="wraps">
 <div id="contents">
 	<div class="leftside leftpix snapsPhoto">
 		 <div class="item" style="display: block; height: 100%;  top: 0px;">

@@ -17,6 +17,19 @@
 
 <style>
 
+a:hover {
+	color: #fff
+}
+
+a, a:hover, .pic .pic-image, .pic-caption, .pic:hover .pic-caption, .pic:hover img
+	{
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	-ms-transition: all 0.5s ease;
+	transition: all 0.5s ease
+}
+
 .out {
 	width: 100%;
 	text-align: center;

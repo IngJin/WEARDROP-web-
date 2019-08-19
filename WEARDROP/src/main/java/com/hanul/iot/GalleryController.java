@@ -1,32 +1,24 @@
 package com.hanul.iot;
 
 import java.io.File;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.MultipartRequest;
 
 import com.google.gson.Gson;
 
 import common.CommonService;
+import gallery.GalleryPage;
 import gallery.GalleryServiceImpl;
 import gallery.GalleryVO;
 
@@ -38,55 +30,72 @@ public class GalleryController {
 	private GalleryServiceImpl service;
 	@Autowired
 	private CommonService common;
-
-	// °¶·¯¸® È­¸é¿äÃ»
+	@Autowired
+	private GalleryPage page;
+	
+	// ï¿½Å±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½ È­ï¿½ï¿½ï¿½Ã»
+	@RequestMapping("/test.gal")
+	public String gallery_test() {
+			return "gallery/list4";
+	}// gallery()
+		
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È­ï¿½ï¿½ï¿½Ã»
 	@RequestMapping("/list.gal")
-	public String list(Model model, String search, String keyword) {
-		// DB¿¡¼­ °¶·¯¸® ¸ñ·ÏÀ» Á¶È¸ÇØ¿Í
-		// ¸ñ·ÏÈ­¸é¿¡ Ãâ·ÂÇÒ ¼ö ÀÖµµ·Ï Model¿¡ ´ã´Â´Ù.
-		model.addAttribute("category", "gal"); // Ä«Å×°í¸®
-		//°Ë»öÇÑ °á°ú¿¡ ÇØ´çÇÏ´Â °øÁö±Û¸ñ·ÏÀ» Á¶È¸ÇÏ´Â °æ¿ì
-		if( keyword != null ) {
-			//key,value ÇüÅÂÀÇ ÀÚ·á±¸Á¶ : HashMap
-			HashMap<String, String> map = new HashMap<String, String>();
-			map.put("search", search);
-			map.put("keyword", keyword);
-			model.addAttribute("list", service.list(map));
-			model.addAttribute("search",search);
-			model.addAttribute("keyword",keyword);
-		}else {
-			//°Ë»ö¾øÀÌ °øÁö±Û¸ñ·ÏÀ» Á¶È¸ÇÏ´Â °æ¿ì
-			model.addAttribute("list", service.list());
-		}
-		return "gallery/list2";
+	public String list(@RequestParam(defaultValue="1") int curPage,
+			Model model, String search, String keyword) {
+		// DBï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸ï¿½Ø¿ï¿½
+		// ï¿½ï¿½ï¿½È­ï¿½é¿¡ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Öµï¿½ï¿½ï¿½ Modelï¿½ï¿½ ï¿½ï¿½Â´ï¿½.
+		model.addAttribute("category", "gal"); // Ä«ï¿½×°ï¿½
+		//ï¿½Ë»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø´ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Û¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½
+		//0816
+//		if( keyword != null ) {
+//			//key,value ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ú·á±¸ï¿½ï¿½ : HashMap
+//			HashMap<String, String> map = new HashMap<String, String>();
+//			map.put("search", search);
+//			map.put("keyword", keyword);
+//			model.addAttribute("list", service.list(map));
+//			model.addAttribute("search",search);
+//			model.addAttribute("keyword",keyword);
+//		}else {
+//			//ï¿½Ë»ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Û¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½
+//			model.addAttribute("list", service.list());
+//		}
+		page.setCurPage(curPage);
+		page.setSearch(search); //190708 ï¿½Ë»ï¿½
+		page.setKeyword(keyword); //190708 Å°ï¿½ï¿½ï¿½ï¿½
+		model.addAttribute("page", service.list(page));
+		return "gallery/list3";
 	}//list()
 	
-	// »ó¼¼ È­¸é¿äÃ»
+	// ï¿½ï¿½ È­ï¿½ï¿½ï¿½Ã»
 	@RequestMapping("/detail.gal")
 	public String detail(Model model, int id, @RequestParam(defaultValue = "0") int read, HttpSession session) {
 		String resources = session.getServletContext().getRealPath("resources");
 		if (read == 1) {
-			// Á¶È¸¼ö Áõ°¡ Ã³¸®
+			// ï¿½ï¿½È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
 			service.read(id);
 		}
 		model.addAttribute("vo", service.detail(id));
+		model.addAttribute("crlf", "\r\n");
+		model.addAttribute("lf", "\n");
+		model.addAttribute("page", page);
 		model.addAttribute("resources", resources);
 		return "gallery/detail";
 	}//detail()
 
-	// ½Å±Ô °¶·¯¸® ÀÛ¼º È­¸é¿äÃ»
+	// ï¿½Å±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½ È­ï¿½ï¿½ï¿½Ã»
 	@RequestMapping("/new.gal")
 	public String gallery() {
 		return "gallery/new";
 	}// gallery()
 
-	// ½Å±Ô °¶·¯¸® ÀúÀåÃ³¸® ¿äÃ»
+	// ï¿½Å±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ã³ï¿½ï¿½ ï¿½ï¿½Ã»
 	@RequestMapping("/insert.gal")
-	public String insert(GalleryVO vo, MultipartFile file, HttpSession session) { // Ã·ºÎÆÄÀÏ Ã·ºÎ MultipartFile
-		// È­¸é¿¡¼­ ÀÔ·ÂÇÑ Á¤º¸¸¦ DB¿¡ ÀúÀåÇÑ ÈÄ
-		// ¸ñ·ÏÈ­¸éÀ¸·Î ¿¬°á
-		// Ã·ºÎÆÄÀÏÀÌ ÀÖ´Â °æ¿ì ÆÄÀÏÁ¤º¸¸¦ µ¥ÀÌÅÍ°´Ã¼¿¡ ´ã´Â´Ù.
-		if (file.getSize() > 0) {// Ã·ºÎÇÑ ÆÄÀÏÀÌ ÀÖ´Â °æ¿ì
+	public String insert(GalleryVO vo, MultipartFile file, HttpSession session) { // Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã·ï¿½ï¿½ MultipartFile
+		// È­ï¿½é¿¡ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ DBï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+		// ï¿½ï¿½ï¿½È­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		// Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½Â´ï¿½.
+		if (file.getSize() > 0) {// Ã·ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½
 			vo.setFilename(file.getOriginalFilename());
 			vo.setFilepath(common.upload("gallery", file, session));
 		}
@@ -95,59 +104,59 @@ public class GalleryController {
 	}// insert()
 	
 	
-	//°¶·¯¸® »èÁ¦ Ã³¸® ¿äÃ»
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ ï¿½ï¿½Ã»
 	@RequestMapping("/delete.gal")
 	public String delete(int id, HttpSession session) {
-		//Ã·ºÎµÈ ÆÄÀÏÀÌ ÀÖ´Ù¸é ¹°¸®Àû °ø°£¿¡¼­ ÇØ´ç ÆÄÀÏÀ» »èÁ¦
+		//Ã·ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	File f = new File(
 			session.getServletContext().getRealPath(
 			"resources" + service.detail(id).getFilepath()));
-			if(f.exists()) f.delete(); //ÆÄÀÏÀ» »èÁ¦ÇÏ´Â Ã³¸®
-			//ÇØ´ç °øÁö±ÛÀ» DB¿¡¼­ »èÁ¦ÇÑ ÈÄ
-			//¸ñ·ÏÈ­¸éÀ¸·Î ¿¬°á
+			if(f.exists()) f.delete(); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ Ã³ï¿½ï¿½
+			//ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ DBï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+			//ï¿½ï¿½ï¿½È­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			service.delete(id);
 			return "redirect:list.gal";
 	}//delete()
 	
-	//°¶·¯¸® ¼öÁ¤È­¸é ¿äÃ»
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½ ï¿½ï¿½Ã»
 		@RequestMapping("/modify.gal")
 		public String modify(int id, Model model) {
-			//DB¿¡¼­ ÇØ´ç °øÁö±Û Á¤º¸¸¦ Á¶È¸ÇØ¿Â ÈÄ
-			//¼öÁ¤È­¸é¿¡ Ãâ·ÂÇÏµµ·Ï Model¿¡ ´ã´Â´Ù.
+			//DBï¿½ï¿½ï¿½ï¿½ ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸ï¿½Ø¿ï¿½ ï¿½ï¿½
+			//ï¿½ï¿½ï¿½ï¿½È­ï¿½é¿¡ ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½ Modelï¿½ï¿½ ï¿½ï¿½Â´ï¿½.
 			model.addAttribute("vo", service.detail(id));
 			return "gallery/modify";
 		}//modify()
 		
-		//°øÁö±Û ¼öÁ¤ Ã³¸® ¿äÃ»
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ ï¿½ï¿½Ã»
 		@RequestMapping("/update.gal")
 		public String update(GalleryVO vo, MultipartFile file, 
-								HttpSession session, String attach) { // ÆÄÀÏµµ Ã·ºÎÇØ¾ßÇÏ¹Ç·Î MultipartFile, ¹°¸®ÀûÀÎ À§Ä¡ HttpSession, ³×ÀÌ¹Öµ¥ÀÌÅÍ attach
-			// È­¸é¿¡¼­ º¯°æ ÀÔ·ÂÇÑ Á¤º¸¸¦ DB¿¡ ÀúÀåÇÑ ÈÄ 
-			// »ó¼¼È­¸éÀ¸·Î ¿¬°á
+								HttpSession session, String attach) { // ï¿½ï¿½ï¿½Ïµï¿½ Ã·ï¿½ï¿½ï¿½Ø¾ï¿½ï¿½Ï¹Ç·ï¿½ MultipartFile, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ HttpSession, ï¿½ï¿½ï¿½Ì¹Öµï¿½ï¿½ï¿½ï¿½ï¿½ attach
+			// È­ï¿½é¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ DBï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ 
+			// ï¿½ï¿½È­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			
-			// 1. ¿ø·¡ Ã·ºÎµÈ ÆÄÀÏÀÌ ¾ø´Âµ¥ º¯°æÇÏ¸é¼­ Ã·ºÎÇÏ´Â °æ¿ì
-			// ¿ø·¡ DB¿¡ ÀúÀåµÇ¾î ÀÖ´ø Ã·ºÎÆÄÀÏÁ¤º¸¸¦ Á¶È¸ÇØ ¿Â´Ù.
+			// 1. ï¿½ï¿½ï¿½ï¿½ Ã·ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Âµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸é¼­ Ã·ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½
+			// ï¿½ï¿½ï¿½ï¿½ DBï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ ï¿½Ö´ï¿½ Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸ï¿½ï¿½ ï¿½Â´ï¿½.
 			GalleryVO gallery = service.detail(vo.getId());
 			String uuid = gallery.getFilepath();
 			// /upload/notice/2019/07/03/ads-er232-00faf_abc.txt
-			// ¼¼¼ÇÀ¸·ÎºÎÅÍ À§Ä¡µ¥ÀÌÅÍ¸¦ °¡Á®¿Í¾ßÇÔ
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îºï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¾ï¿½ï¿½ï¿½
 			uuid = session.getServletContext().getRealPath("resources") +uuid;
 			// d:/Study_Spring/...../upload/gallery/2019/07/03/ads-er232-00faf_abc.txt
 			
 			if(file.getSize()>0) {
 				vo.setFilename(file.getOriginalFilename());
 				vo.setFilepath(common.upload("gallery", file, session));
-				// 2. ¿ø·¡ Ã·ºÎµÈ ÆÄÀÏÀÌ ÀÖ¾ú°í ±× ÆÄÀÏÀ» ´Ù¸¥ ÆÄÀÏ·Î º¯°æÇØ Ã·ºÎÇÏ´Â °æ¿ì
-				// ¿ø·¡ Ã·ºÎµÈ ÆÄÀÏÀº »èÁ¦ÇÑ´Ù.
+				// 2. ï¿½ï¿½ï¿½ï¿½ Ã·ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½Ï·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã·ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½
+				// ï¿½ï¿½ï¿½ï¿½ Ã·ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 				File f = new File(uuid);
 				if(f.exists()) f.delete();
 			}else {
-				// 3. ¿ø·¡ Ã·ºÎµÈ ÆÄÀÏÀÌ ÀÖ¾ú´Âµ¥ Ã·ºÎµÈ ÆÄÀÏÀ» »èÁ¦ÇÏ´Â °æ¿ì
+				// 3. ï¿½ï¿½ï¿½ï¿½ Ã·ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½Âµï¿½ Ã·ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½
 				if(attach.equals("y")) {
 					File f = new File(uuid);
 					if(f.exists()) f.delete();
 				}else {
-					// 4. ¿ø·¡ Ã·ºÎµÈ ÆÄÀÏÀÌ ÀÖ°í ±×´ë·Î »ç¿ëÇÏ´Â °æ¿ì
+					// 4. ï¿½ï¿½ï¿½ï¿½ Ã·ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö°ï¿½ ï¿½×´ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½
 					vo.setFilename(gallery.getFilename());
 					vo.setFilepath(gallery.getFilepath());
 				}
@@ -156,7 +165,7 @@ public class GalleryController {
 			return "redirect:detail.gal?id=" + vo.getId();
 		}//update()	
 	
-	//¾Èµå·ÎÀÌµå Ã³¸®
+	//ï¿½Èµï¿½ï¿½ï¿½Ìµï¿½ Ã³ï¿½ï¿½
 	@ResponseBody @RequestMapping(value="/json.gal", 
 			produces="application/json; charset=utf-8")
 	public String JSONDate(Model model) {
@@ -188,17 +197,17 @@ public class GalleryController {
 //		}
 //		JSONObject result = new JSONObject();
 //		String title = (String) map.get("title");
-//		System.out.println("Á¦¸ñ1 : " + map.get("title"));
+//		System.out.println("ï¿½ï¿½ï¿½ï¿½1 : " + map.get("title"));
 //		String content = (String) map.get("content");
 //		String writer = (String) map.get("writer");
 //		String filename = file.getOriginalFilename();
 //		String filepath = common.upload("gallery", file, session);
 //		
 //		GalleryVO vo = new GalleryVO(title, content, writer, filename, filepath);
-//		System.out.println("Á¦¸ñ : " + title);
-//		System.out.println("³»¿ë : " + content);
-//		System.out.println("ÀÛ¼ºÀÚ : " + writer);
-//		System.out.println("ÆÄÀÏ¸í : " + file.getOriginalFilename());
+//		System.out.println("ï¿½ï¿½ï¿½ï¿½ : " + title);
+//		System.out.println("ï¿½ï¿½ï¿½ï¿½ : " + content);
+//		System.out.println("ï¿½Û¼ï¿½ï¿½ï¿½ : " + writer);
+//		System.out.println("ï¿½ï¿½ï¿½Ï¸ï¿½ : " + file.getOriginalFilename());
 //		System.out.println(file.getSize());
 //		vo.setFilename(file.getOriginalFilename());
 //		
@@ -213,13 +222,13 @@ public class GalleryController {
 //	}
 	
 	@RequestMapping("/andinsert.gal")
-	public String andinsert(GalleryVO vo, @RequestParam("p_name") String p_name, MultipartFile file, HttpSession session) { // Ã·ºÎÆÄÀÏ Ã·ºÎ MultipartFile
-		// È­¸é¿¡¼­ ÀÔ·ÂÇÑ Á¤º¸¸¦ DB¿¡ ÀúÀåÇÑ ÈÄ
-		// ¸ñ·ÏÈ­¸éÀ¸·Î ¿¬°á
-		// Ã·ºÎÆÄÀÏÀÌ ÀÖ´Â °æ¿ì ÆÄÀÏÁ¤º¸¸¦ µ¥ÀÌÅÍ°´Ã¼¿¡ ´ã´Â´Ù.
+	public String andinsert(GalleryVO vo, @RequestParam("p_name") String p_name, MultipartFile file, HttpSession session) { // Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã·ï¿½ï¿½ MultipartFile
+		// È­ï¿½é¿¡ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ DBï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+		// ï¿½ï¿½ï¿½È­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		// Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½Â´ï¿½.
 		System.out.println("p_name=====================" + p_name);
 		
-		if (file.getSize() > 0) {// Ã·ºÎÇÑ ÆÄÀÏÀÌ ÀÖ´Â °æ¿ì
+		if (file.getSize() > 0) {// Ã·ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½
 			vo.setFilename(file.getOriginalFilename());
 			vo.setFilepath(common.upload("gallery", file, session));
 		}

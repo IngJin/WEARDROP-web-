@@ -53,35 +53,89 @@
 	} */
 </script>
 <style type="text/css">
+#wrap {
+    width: 100%;
+    height: 100%;
+}
+
+div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, table, img, section, header, footer, article, object, svg {
+    position: relative;
+    backface-visibility: hidden;
+    outline: none;
+}
+
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td {
+    margin: 0;
+    padding: 0;
+}
+
+
+div {
+    display: block;
+}
 
 body {
-    text-align: center;
+    position: relative;
+    outline: none;
+    color: #000;
+    background: #fff;
+    text-align: left;
+    line-height: 1.231;
+    -webkit-text-size-adjust: none;
+    letter-spacing: 2px;
+    overflow: hidden;
 }
+
 #wrap #menu {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 175px;
-	height: 100%;
-	background-color: #000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 175px;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+#wrap #menu h1 {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    margin-top: -37px;
+    width: 175px;
+}
+
+#wrap #menu h1 a, #wrap #menu h1 img {
+    position: relative;
+}
+
+#wrap #menu .searchBtn {
+    width: 18px;
+    display: block;
+    position: fixed;
+    bottom: 15px;
+    left: 15px;
+}
+
+#wrap #menu .searchBtn img {
+    width: 100%;
+    height: auto;
 }
 
 #wrap #contents {
-	margin-left: 175px;
-	height: 100%;
-	background-color: #f2f2f2;
+    margin-left: 175px;
+    height: 100%;
 }
 
-#wrap #contents .format6 .freshsnapsWrap {
-	background-color: #0000ff;
+#wrap #contents .format6.freshsnapsWrap {
+    background-color: #0000ff;
 }
 
 #wrap #contents .format6 {
-	width: 100%;
-	height: 100%;
-	clear: both;
-	*zoom: 1;
-	background-color: #000000;
+    width: 100%;
+    height: 100%;
+    clear: both;
+    *zoom: 1;
+    background-color: #edff00;
 }
 
 #wrap #contents .format6:before, #wrap #contents .format6:after {
@@ -94,12 +148,51 @@ body {
 	clear: both;
 }
 
+#wrap #contents .format6.freshsnapsWrap .item {
+    background-color: #0000ff;
+}
+
 #wrap #contents .format6 .item {
-	float: left;
-	width: 16.6666%;
-	height: 33.3333%;
-	overflow: hidden;
-	background-color: #ffffff;
+    float: left;
+    width: 16.6666%;
+    height: 33.3333%;
+    overflow: hidden;
+    background-color: #edff00;
+}
+
+#wrap #contents .format6 .item a {
+    width: 100.5%;
+    height: 100.5%;
+    position: relative;
+    display: table;
+    vertical-align: middle;
+    overflow: hidden;
+}
+
+a {
+    text-decoration: none;
+}
+
+a {
+    cursor: pointer;
+    _cursor: hand;
+    outline: none;
+}
+
+#wrap #contents .format6 .item a:after {
+    display: block;
+    background-color: #edff00;
+    width: 100%;
+    height: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    content: "";
+    -webkit-transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+    -moz-transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+    -o-transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
 /* #wrap #contents .format6 .item a .photo {
@@ -108,157 +201,34 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
+} */
+
+.pic-span{
+	border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    margin: 0;
+    padding: 0;
 }
+
+/* #wrap #contents .format6 .item a .photo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+} */
 
 .photo {
 	background-position: 50% 50%;
 	background-repeat: no-repeat;
 	background-size: cover;
-} */
-
-/* 사이드바 */
-/* #sidebarMenu {
-	height: 100%;
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 175px;
-	transform: translateX(-250px);
-	transition: transform 250ms ease-in-out;
-	background: linear-gradient(180deg, #FC466B 0%, #3F5EFB 100%);
 }
 
-.sidebarMenuInner {
-	margin: 0;
-	padding: 0;
-	border-top: 1px solid rgba(255, 255, 255, 0.10);
-}
 
-.sidebarMenuInner li {
-	list-style: none;
-	color: #fff;
-	text-transform: uppercase;
-	font-weight: bold;
-	padding: 20px;
-	cursor: pointer;
-	border-bottom: 1px solid rgba(255, 255, 255, 0.10);
-}
 
-.sidebarMenuInner li span {
-	display: block;
-	font-size: 14px;
-	color: rgba(255, 255, 255, 0.50);
-}
-
-.sidebarMenuInner li a {
-	color: #fff;
-	text-transform: uppercase;
-	font-weight: bold;
-	cursor: pointer;
-	text-decoration: none;
-}
-
-input[type="checkbox"]:checked ~ #sidebarMenu {
-	transform: translateX(0);
-}
-
-input[type=checkbox] {
-	transition: all 0.3s;
-	box-sizing: border-box;
-	display: none;
-}
-
-.sidebarIconToggle {
-	transition: all 0.3s;
-	box-sizing: border-box;
-	cursor: pointer;
-	position: absolute;
-	z-index: 99;
-	height: 100%;
-	width: 100%;
-	top: 22px;
-	left: 15px;
-	height: 22px;
-	width: 22px;
-}
-
-.spinner {
-	transition: all 0.3s;
-	box-sizing: border-box;
-	position: absolute;
-	height: 3px;
-	width: 100%;
-	background-color: #fff;
-}
-
-.horizontal {
-	transition: all 0.3s;
-	box-sizing: border-box;
-	position: relative;
-	float: left;
-	margin-top: 3px;
-}
-
-.diagonal.part-1 {
-	position: relative;
-	transition: all 0.3s;
-	box-sizing: border-box;
-	float: left;
-}
-
-.diagonal.part-2 {
-	transition: all 0.3s;
-	box-sizing: border-box;
-	position: relative;
-	float: left;
-	margin-top: 3px;
-}
-
-input[type=checkbox]:checked ~ .sidebarIconToggle>.horizontal {
-	transition: all 0.3s;
-	box-sizing: border-box;
-	opacity: 0;
-}
-
-input[type=checkbox]:checked ~ .sidebarIconToggle>.diagonal.part-1 {
-	transition: all 0.3s;
-	box-sizing: border-box;
-	transform: rotate(135deg);
-	margin-top: 8px;
-}
-
-input[type=checkbox]:checked ~ .sidebarIconToggle>.diagonal.part-2 {
-	transition: all 0.3s;
-	box-sizing: border-box;
-	transform: rotate(-135deg);
-	margin-top: -9px;
-} */
-
-/* #popup-background {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	left: 0;
-	top: 0;
-	background-color: #000;
-	opacity: 0.5;
-	display: none;
-	z-index: 99997;
-}
-
-#popup {
-	position: absolute;
-	width: 800px;
-	height: 600px;
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%, -50%);
-	border: 3px solid #666;
-	display: none;
-	z-index: 99998;
-} */
-
-/* #searchWrap {
+#searchWrap {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -311,44 +281,41 @@ input[type=checkbox]:checked ~ .sidebarIconToggle>.diagonal.part-2 {
 	display: block;
 	width: 18px;
 	height: 18px;
-} */
+}
 </style>
 </head>
 <body>
 	<form action="list.gal" method="post" id="list">
 		<div id="wrap">
-			<div id="popup"></div>
-			<div id="popup-background"
-				onclick="$('#popup, #popup-background').css('display','none')"></div>
 			<div id="menu">
-				<input type="checkbox" class="openSidebarMenu" id="openSidebarMenu">
-				<label for="openSidebarMenu" class="sidebarIconToggle">
-					<div class="spinner diagonal part-1"></div>
-					<div class="spinner horizontal"></div>
-					<div class="spinner diagonal part-2"></div>
-				</label>
-				<!-- 사이드바 메뉴 -->
-				<div id="sidebarMenu">
-					<ul class="sidebarMenuInner">
-						<li></li>
-						<li>WEARDROP <span>OOTD GALLERY</span></li>
-						<li><a href="https://instagram.com/ing.jin" target="_blank">Instagram</a></li>
-						<li><a onclick="show_map()">글쓰기</a></li>
-						<li><a onclick="location.href='new.gal'">글쓰기</a></li>
-						<li><a onclick="show_search()">검색</a></li>
-					</ul>
-				</div>
+				<h1>
+					<a class="cutOut" href="#">
+						<img alt src="img/gal_logo.png" style="visibility: visible;">
+						<div class="bg" style="width: 0px; right: 18px; left: 0px;"></div>
+					</a>
+				</h1>
+				
+				<a class="searchBtn" style="cursor:pointer" onclick="show_search();"> 
+				<a class="searchBtn" onclick="location.href='new.gal'">글쓰기</a>
+				<img alt="search" src="img/icon_search.png" style="visibility: visible;">
+				<div class="bg" style="width: 0px; right: 18px; left: 0px;"></div>
+				</a>
+				
 			</div>
+			
 			<!-- 본문 -->
-			<div id="contents">
+			<div id="contents" style="transform-style: preserve-3d; perspective: 2000px; transform-origin: 50% 50% 0px; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);">
 				<div class="format6 freshsnapsWrap">
 					<!-- ::before -->
 					<c:forEach items="${list }" var="vo">
 						<div class="item">
-							<div class="pic">
+							<div class="cutSnap">
 								<a onclick="href='detail.gal?id=${vo.id}&read=1'"> 
-								<img class="photo pic-image" src="<c:url value='/'/>${vo.filepath}" alt="사진이었던것" 
-									style="width: 300px; height: 300px" /> 
+								<span class="pic-span photo">
+									<img class="pic-image" src="<c:url value='/'/>${vo.filepath}" alt="사진이었던것"
+									style="width:300px; height:300px;"/> 
+								</span>
+								
 								<span class="pic-caption bottom-to-top"> 
 									<span><p class="my-effect">${vo.title}</p></span><br> 
 									<span><p class="my-effect">조회수 : ${vo.readcnt }</p></span>

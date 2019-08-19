@@ -4,21 +4,29 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
-
-
-
 public interface GalleryService {
-	List<GalleryVO> list(); //Á¶È¸
-	List<GalleryVO> andlist(); //¾ÈµåÁ¶È¸
-	List<GalleryVO> list(HashMap<String, String> map);
-	GalleryVO detail(int id); //»ó¼¼
-	boolean insert(GalleryVO vo);//»ğÀÔ
-	boolean delete(int id); //»èÁ¦¸¦ Çß´Ù, ¾ÈÇß´Ù.
-	boolean update(GalleryVO vo); //º¯°æÀ» Çß´Ù, ¾ÈÇß´Ù.
-	void read(int id);
+	List<GalleryVO> list(); // ì¶œë ¥
+
+	List<GalleryVO> andlist(); // ì•ˆë“œ ì¶œë ¥
+
+	List<GalleryVO> list(HashMap<String, String> map); //ê²€ìƒ‰
+
+	GalleryVO detail(int id); // ìƒì„¸
+
+	boolean insert(GalleryVO vo);// ì‚½ì…
+
+	boolean delete(int id); // ì‚­ì œ
+
+	boolean update(GalleryVO vo); // ìˆ˜ì •
+
+	void read(int id); //ì¡°íšŒìˆ˜
+
 	List<GalleryVO> test();
-	boolean galUpdate();
-	boolean andInsert(GalleryVO vo);
-	//boolean andInsert(HashMap<String, Object> map);
+
+	boolean galUpdate(); // ë¦¬í”Œë ˆì´ìŠ¤
+
+	boolean andInsert(GalleryVO vo); // ì•ˆë“œ ì‚½ì…
+	// boolean andInsert(HashMap<String, Object> map);
+	
+	GalleryPage list(GalleryPage vo);
 }
