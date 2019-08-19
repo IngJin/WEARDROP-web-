@@ -36,12 +36,18 @@ public class MainController {
 	public String home(Locale locale, Model model) {
 		model.addAttribute("category", "");
 		return "home";
-	}
+	}	
 
 	// 약관 페이지 호출
 	@RequestMapping("/terms.ho")
 	public String terms() {
 		return "terms";
+	}
+	
+	// 약관 페이지 호출
+	@RequestMapping("/mypage.ho")
+	public String mypage() {
+		return "main/mypage";
 	}
 
 	// 아이디 찾기 페이지 호출
@@ -86,6 +92,7 @@ public class MainController {
 		}
 		return vo == null ? false : true;
 	}
+	
 
 	// 회원가입 처리 요청
 	@ResponseBody
@@ -102,6 +109,31 @@ public class MainController {
 		return sb.toString();
 	}
 
+	// 회원정보 수정
+	@ResponseBody
+	@RequestMapping(value = "/mod_info", produces = "text/html; charset=utf-8")
+	public String modified(MainVO vo) {
+		// 화면에서 입력한 정보를 DB에 저장한 후 홈으로 이동
+		StringBuffer sb = new StringBuffer("<script type='text/javascript'>");
+		if (service.update(vo)) {
+			sb.append("alert('회원정보를 수정하셨습니다.'); location='index'");
+		} else {
+			sb.append("alert('회원정보를 수정하지 못했습니다.'); history.go(-1);");
+		}
+		sb.append("</script>");
+		return sb.toString();
+	}
+	
+	// 회원정보 삭제 처리 요청
+	@RequestMapping("/delete.ho")
+	public String delete(String userid, HttpSession session) {
+		service.delete(userid);
+		kakao.kakaoLogout((String) session.getAttribute("access_Token"));
+		session.removeAttribute("access_Token");
+		session.removeAttribute("info_login");
+		return "redirect:index";
+	}
+	
 	// 아이디 중복확인 요청
 	@ResponseBody
 	@RequestMapping("/id_check_main")

@@ -2,6 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="main.mapper">
 
+<update id="update">
+	update member2 set writer=#{writer}, userpw=#{userpw}, email=#{email}
+		where userid=#{userid}
+</update>
+
 <select id="id_check" resultType="integer">
 	select count(*) from member2 where userid = #{userid}
 </select>
@@ -30,6 +35,10 @@
 <select id="email_check" resultType="integer">
 	select count(*) from member2 where email = #{email}
 </select>
+
+<delete id="delete">
+	delete from member2 where userid = #{userid}
+</delete>
 
 <insert id="kakao_insert">
 	insert into member2(userid, writer, email, userpw)

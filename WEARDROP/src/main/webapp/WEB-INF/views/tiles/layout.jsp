@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>한울직업전문학교</title>
+<title>WEARDROP</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <link rel="icon" type="image/x-icon" href="img/hanul.ico">
 <script type="text/javascript" src="js/common.js"></script>

@@ -26,14 +26,12 @@ public class MainDAO implements MainService {
 
 	@Override
 	public boolean update(MainVO vo) {
-		// TODO Auto-generated method stub
-		return false;
+		return sql.update("main.mapper.update", vo) > 0 ? true : false;
 	}
 
 	@Override
 	public boolean delete(String userid) {
-		// TODO Auto-generated method stub
-		return false;
+		return sql.delete("main.mapper.delete", userid) > 0 ? true : false;
 	}
 
 	@Override

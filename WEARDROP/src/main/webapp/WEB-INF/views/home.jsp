@@ -477,7 +477,7 @@ function go_logout() {
 				</div>
 				</br> 
 				<c:if test="${ !empty info_login}">
-					<div class="user_info">${info_login.userid} [${info_login.writer}]</div><br/>
+					<div class="user_info"><a onclick="location='mypage.ho'">${info_login.userid} [${info_login.writer}]</a></div><br/>
 					<a class="btn" onclick="go_logout()">Logout</a>
 				</c:if>
 				<c:if test="${ empty info_login}">

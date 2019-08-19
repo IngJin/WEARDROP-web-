@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding|Raleway&display=swap" rel="stylesheet">
 <style type="text/css">
 .login {
-	margin-top: 280px;
+	margin-top: 240px;
 	margin-left: 8px; 	
 }
 </style>
@@ -148,7 +148,7 @@ $(function(){
 					</div> <!-- out -->
 					<div class="login">
 						<c:if test="${ !empty info_login}">
-						<div class="user_info">${info_login.userid} [${info_login.writer}]</div><br/>
+						<div class="user_info"><a onclick="location='mypage.ho'">${info_login.userid} [${info_login.writer}]</a></div><br/>
 						<a class="btn" onclick="go_logout()">Logout</a>
 						</c:if>
 						<c:if test="${ empty info_login}">

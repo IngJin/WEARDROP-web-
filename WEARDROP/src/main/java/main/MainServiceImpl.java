@@ -26,14 +26,12 @@ public class MainServiceImpl implements MainService {
 
 	@Override
 	public boolean update(MainVO vo) {
-		// TODO Auto-generated method stub
-		return false;
+		return dao.update(vo);
 	}
 
 	@Override
 	public boolean delete(String userid) {
-		// TODO Auto-generated method stub
-		return false;
+		return dao.delete(userid);
 	}
 
 	@Override

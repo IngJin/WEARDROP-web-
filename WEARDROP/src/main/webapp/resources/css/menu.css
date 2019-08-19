@@ -8,7 +8,7 @@ html, body {
 	font-size: 15px;
 	text-align: left;
 	background-color: #F1F1F1;
-}
+}.header .gnbIn
 
 .out {
 	width: 100%;
@@ -302,7 +302,6 @@ body.ofH {
 	left: 0;
 	width: 175px;
 	height: 100%;
-	padding-bottom: 90px;
 	margin-left: -90px;	
 	text-align: left;
 	-webkit-box-sizing: border-box;
@@ -311,7 +310,6 @@ body.ofH {
 	-ms-box-sizing: border-box;
 	box-sizing: border-box;
 }
-
 
 .header .gnbIn>div {
 	display: inline-block;
