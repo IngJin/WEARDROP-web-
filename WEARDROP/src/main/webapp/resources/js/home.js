@@ -11,9 +11,7 @@ function we_nothover() {
 
 function nothover() {
     we_nothover();
-    $("#myVideo").css("display", "none");
     $("#myVideo").attr("src", "video/main.mp4");
-    $("#myVideo").fadeIn(800);
     $(".display").css('background-image', '');
     $(".we_img").css("background-image", '');
 }
