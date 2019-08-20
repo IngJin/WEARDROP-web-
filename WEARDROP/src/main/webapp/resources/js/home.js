@@ -1,6 +1,6 @@
 $(function($) {
     $("body").css("display", "none");
-    $("body").fadeIn(1000);
+    $("body").fadeIn(800);
 });
 
 function we_nothover() {
@@ -13,7 +13,7 @@ function nothover() {
     we_nothover();
     $("#myVideo").css("display", "none");
     $("#myVideo").attr("src", "video/main.mp4");
-    $("#myVideo").fadeIn(1000);
+    $("#myVideo").fadeIn(800);
     $(".display").css('background-image', '');
     $(".we_img").css("background-image", '');
 }
@@ -21,19 +21,19 @@ function nothover() {
 function notmain() {
     $("#myVideo").css("display", "none");
     $("#myVideo").attr("src", "video/main.mp4");
-    $("#myVideo").fadeIn(1000);
+    $("#myVideo").fadeIn(800);
 }
 
 function hot() {
     $(".display").css("display", "none");
     $(".display").css('background-image', 'url("img/weather_hot.jpg")');
-    $(".display").fadeIn(1000);
+    $(".display").fadeIn(800);
 }
 
 function cold() {
     $(".display").css("display", "none");
     $(".display").css('background-image', 'url("img/weather_cold.jpg")');
-    $(".display").fadeIn(1000);
+    $(".display").fadeIn(800);
 }
 
 var ip = "https://jsonip.com";
@@ -64,9 +64,9 @@ $.ajax({
                             we_nothover();
                             $("#myVideo").css("display", "none");
                             $("#myVideo").attr("src", "video/daliy.mp4");
-                            $("#myVideo").fadeIn(1000);
+                            $("#myVideo").fadeIn(800);
                             $(".dailyLook_co").css("display", "none");
-                            $(".dailyLook_co").fadeIn(1000);
+                            $(".dailyLook_co").fadeIn(800);
                         }, function() {
                             $(".dailyLook_co").fadeOut(0.1);
                             $(".dailyLook_co").css("display", "none");
@@ -77,9 +77,9 @@ $.ajax({
                             we_nothover();
                             $("#myVideo").css("display", "none");
                             $("#myVideo").attr("src", "video/usermarket.mp4");
-                            $("#myVideo").fadeIn(1000);
+                            $("#myVideo").fadeIn(800);
                             $(".usermarket_co").css("display", "none");
-                            $(".usermarket_co").fadeIn(1000);
+                            $(".usermarket_co").fadeIn(800);
                         }, function() {
                             $(".usermarket_co").fadeOut(0.1);
                             $(".usermarket_co").css("display", "none");
@@ -90,9 +90,9 @@ $.ajax({
                             we_nothover();
                             $("#myVideo").css("display", "none");
                             $("#myVideo").attr("src", "video/service.mp4");
-                            $("#myVideo").fadeIn(1000);
+                            $("#myVideo").fadeIn(800);
                             $(".service_co").css("display", "none");
-                            $(".service_co").fadeIn(1000);
+                            $(".service_co").fadeIn(800);
                         }, function() {
                             $(".service_co").fadeOut(0.1);
                             $(".service_co").css("display", "none");
@@ -103,9 +103,9 @@ $.ajax({
                             we_nothover();
                             $("#myVideo").css("display", "none");
                             $("#myVideo").attr("src", "video/comm.mp4");
-                            $("#myVideo").fadeIn(1000);
+                            $("#myVideo").fadeIn(800);
                             $(".community_co").css("display", "none");
-                            $(".community_co").fadeIn(1000);
+                            $(".community_co").fadeIn(800);
                         }, function() {
                             $(".community_co").fadeOut(0.1);
                             $(".community_co").css("display", "none");
@@ -117,7 +117,7 @@ $.ajax({
                                 weather();
                                 $("#myVideo").css("display", "none");
                                 $("#myVideo").attr("src", "video/rain.mp4");
-                                $("#myVideo").fadeIn(1000);
+                                $("#myVideo").fadeIn(800);
                                 if ((resp.main.temp - 273.15) > 18) {
                                     hot();
                                 } else {
@@ -127,7 +127,7 @@ $.ajax({
                                 weather();
                                 $("#myVideo").css("display", "none");
                                 $("#myVideo").attr("src", "video/show.mp4");
-                                $("#myVideo").fadeIn(1000);
+                                $("#myVideo").fadeIn(800);
                                 if ((resp.main.temp - 273.15) > 18) {
                                     hot();
                                 } else {
@@ -137,7 +137,7 @@ $.ajax({
                                 weather();
                                 $("#myVideo").css("display", "none");
                                 $("#myVideo").attr("src", "video/clear.mp4");
-                                $("#myVideo").fadeIn(1000);
+                                $("#myVideo").fadeIn(800);
                                 if ((resp.main.temp - 273.15) > 18) {
                                     hot();
                                 } else {
@@ -147,7 +147,7 @@ $.ajax({
                                 weather();
                                 $("#myVideo").css("display", "none");
                                 $("#myVideo").attr("src", "video/cloud.mp4");
-                                $("#myVideo").fadeIn(1000);
+                                $("#myVideo").fadeIn(800);
                                 if ((resp.main.temp - 273.15) > 18) {
                                     hot();
                                 } else {
@@ -157,7 +157,7 @@ $.ajax({
                                 weather();
                                 $("#myVideo").css("display", "none");
                                 $("#myVideo").attr("src", "video/mist.mp4");
-                                $("#myVideo").fadeIn(1000);
+                                $("#myVideo").fadeIn(800);
                                 if ((resp.main.temp - 273.15) > 18) {
                                     hot();
                                 } else {
@@ -237,9 +237,9 @@ function weather() {
                                 }
                                 $("#display").css("display", "none");
                                 $("#display").append(html);
-                                $("#display").fadeIn(1000);
+                                $("#display").fadeIn(800);
                                 $(".we_img").css("display", "none");
-                                $(".we_img").fadeIn(1000);
+                                $(".we_img").fadeIn(800);
                             }, function() {
                                 nothover();
                             });
