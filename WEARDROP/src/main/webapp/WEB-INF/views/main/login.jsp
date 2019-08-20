@@ -156,8 +156,9 @@ function go_login(){
 		data: { userid: $('#Loginid').val(), 
 				userpw: $('#Logindpwd').val() },
 		success: function(data){
-			if( data ){				
+			if( data ){	
 				location='index';
+				alert(data.writer + "님 환영합니다!");
 			} else{
 				alert('아이디나 비밀번호가 일치하지 않습니다!');
 				$('#Loginid').focus();
@@ -186,9 +187,30 @@ function userpw_find() {
 	font-size: 0.9em;
 	font-family: 'Noto Sans KR', sans-serif;
 }
+
+.header_main {
+	width: 175px;
+	background-color: #ffffff;
+	float: left;
+}
+
+.header_main_logo {
+	width: 100px;
+	line-height: 100vh;
+	text-align: center;
+}
+
+.join {
+	 margin-left: 10%;
+}
 </style>
 </head>
 <body>
+	<div class="header_main">
+		<div class="header_main_logo">
+			<img src="img/logo.png" class="logo_img" alt="로고">
+		</div>
+	</div>
 	  <div class="join">
 		  <div class="login">
 		 	<h1 class="login_h1">Login</h1>
@@ -202,7 +224,6 @@ function userpw_find() {
 			<div class="btn_div">
 				<a class="btn" onclick="go_login()">Login</a>
 				<a class="btn" href="https://kauth.kakao.com/oauth/authorize?client_id=47035dbae45dcf3a446b494c2294ae92&redirect_uri=http://192.168.0.67/iot/kakaologin&response_type=code">Kakao</a>
-				<a class="btn" href="#">Naver</a>
 			</div>
 		  </div>		
 	  </div> 

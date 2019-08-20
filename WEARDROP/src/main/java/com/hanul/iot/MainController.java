@@ -1,5 +1,6 @@
 package com.hanul.iot;
 
+import java.io.BufferedReader;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Random;
@@ -76,23 +77,29 @@ public class MainController {
 		kakao.kakaoLogout((String) session.getAttribute("access_Token"));
 		session.removeAttribute("access_Token");
 		session.removeAttribute("info_login");
+		session.removeAttribute("password_mod");
+	}
+	
+	// 마이페이지 비번체크
+	@ResponseBody @RequestMapping("/mypage_check")
+	public void mypage_password(HttpSession session, String userpw) {	
+		session.setAttribute("password_mod", "Y");
 	}
 
 	// 로그인 처리 요청
 	@ResponseBody
 	@RequestMapping("/login_log")
-	public boolean login(String userid, String userpw, HttpSession session) {
+	public MainVO login(String userid, String userpw, HttpSession session) {
 		// DB에서 입력한 아이디, 비번과 일치하는 회원정보 조회
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("userid", userid);
 		map.put("userpw", userpw);
 		MainVO vo = service.login(map);
 		if (vo != null) {
-			session.setAttribute("info_login", vo);
+			session.setAttribute("info_login", vo);			
 		}
-		return vo == null ? false : true;
-	}
-	
+		return vo;
+	}	
 
 	// 회원가입 처리 요청
 	@ResponseBody
@@ -179,7 +186,7 @@ public class MainController {
 	public String kakaologin(@RequestParam("code") String code, HttpSession session) {
 		String access_Token = kakao.getAccessToken(code);
 		HashMap<String, Object> userInfo = kakao.getUserInfo(access_Token);
-
+		session.setAttribute("password_mod", "Y");
 		// 클라이언트의 이메일이 존재할 때 세션에 해당 이메일과 토큰 등록
 		if (userInfo.get("email") != null) {
 			String email = userInfo.get("email").toString();

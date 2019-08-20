@@ -54,7 +54,6 @@ div.block {
 
 .join2 {
 	overflow: hidden;
-	width: 40%;
 	height: 100%;
 	margin-left: 60%;
 }
@@ -381,4 +380,8 @@ a, a:hover, .pic .pic-image, .pic-caption, .pic:hover .pic-caption, .pic:hover i
 	-o-transition: all 0.5s ease;
 	-ms-transition: all 0.5s ease;
 	transition: all 0.5s ease
+}
+
+#display {
+	display: none;
 }
