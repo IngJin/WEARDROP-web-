@@ -19,9 +19,7 @@ function nothover() {
 }
 
 function notmain() {
-    $("#myVideo").css("display", "none");
     $("#myVideo").attr("src", "video/main.mp4");
-    $("#myVideo").fadeIn(800);
 }
 
 function hot() {
