@@ -35,7 +35,7 @@ public class KakaoAPI {
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
             sb.append("&client_id=47035dbae45dcf3a446b494c2294ae92");
-            sb.append("&redirect_uri=http://192.168.0.67/iot/kakaologin");
+            sb.append("&redirect_uri=http://112.164.58.217/weardrop/kakaologin");
             sb.append("&code=" + authorize_code);
             bw.write(sb.toString());
             bw.flush();
@@ -76,7 +76,7 @@ public class KakaoAPI {
     
     public HashMap<String, Object> getUserInfo (String access_Token) {
         
-        // 요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언
+    	// 요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언
         HashMap<String, Object> userInfo = new HashMap<String, Object>();
         String reqURL = "https://kapi.kakao.com/v2/user/me";
         try {
@@ -90,8 +90,7 @@ public class KakaoAPI {
             int responseCode = conn.getResponseCode();
             System.out.println("responseCode : " + responseCode);
             
-            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));            
             String line = "";
             String result = "";
             

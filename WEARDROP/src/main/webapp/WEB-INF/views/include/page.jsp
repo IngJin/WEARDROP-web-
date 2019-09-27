@@ -2,13 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <style>
-.page_list { float:left; width: 100% }
+.page_list {text-align:center; float:left; width: 100% }
 .page_on , .page_off , .page_next , .page_prev , .page_first , .page_last{
-	display:inline-block; width: 30px; line-height:28px;  
+	display:inline-block; width: 30px; line-height:28px;
+	color:#fff; background-color: #AEAEAE; border-radius: 50%;  
 }
 .page_on {
-	border: 1px solid gray; font-weight:bold; 
-	color:#fff; background-color: gray;   
+	border: 1px solid #000; font-weight:bold; 
+	color:#fff; background-color: #000; border-radius: 50%;  
 }
 .page_next, .page_prev , .page_first , .page_last{
 	border: 1px solid #d0d0d0;  text-indent:-99999px;

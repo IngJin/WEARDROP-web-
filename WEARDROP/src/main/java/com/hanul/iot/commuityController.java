@@ -1,63 +1,71 @@
 package com.hanul.iot;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import common.CommonService;
+import community.CommentVO;
 import community.CommunityPage;
 import community.CommunityServiceImpl;
 import community.CommunityVO;
+import main.MainVO;
 
-@Controller
+@Controller @SessionAttributes("category")
 public class commuityController {
 	@Autowired private CommunityServiceImpl service;
 	@Autowired private CommonService common;
 	@Autowired CommunityPage page;
 	
-	//ÀÚÀ¯°Ô½ÃÆÇ È­¸é ¿äÃ»
+	//ììœ ê²Œì‹œíŒ í™”ë©´ ìš”ì²­
 	@RequestMapping("/list.com")
-	public String list(Model model, String search, String keyword,@RequestParam(defaultValue="1") int curPage) {
-		page.setCurPage(curPage);
-		page.setSearch(search);
-		page.setKeyword(keyword);
-		// System.out.println("keyword =========="+keyword);
-		// System.out.println("curPage =========="+curPage);
-		model.addAttribute("page", service.list(page));
+	public String list(@RequestParam(defaultValue="1") int curPage, Model model, String search, String keyword, @RequestParam(defaultValue="1") int code) {
 		return"community/list";
 	}
 	
-	//ÈÄ±â°Ô½ÃÆÇ È­¸é ¿äÃ»
-	@RequestMapping("/list.hu")
-	public String hugi() {
-		return"community/hugi";
+	// ì¤‘ê³ ì¥í„° ëª©ë¡ í™”ë©´ ìš”ì²­
+	@RequestMapping("/list_com.ajax")
+	public String list( @RequestParam(defaultValue="1") int code, @RequestParam(defaultValue="1") int curPage, Model model, String search, String keyword) {
+	page.setCurPage(curPage);
+	page.setSearch(search);
+	page.setKeyword(keyword);
+	page.setCode(code);
+	model.addAttribute("page", service.list(page));
+	return "community/tabs/list";
+				
 	}
 	
-	//ÈÄ±â »ó¼¼È­¸é ¿äÃ»
-	@RequestMapping("/detail.hu")
-	public String hugidetail() {
-		return"community/hugi_detail";
-	}
-	
-	//°Ô½Ã±ÛÀÛ¼ºÈ­¸é ¿äÃ»
+	//ê²Œì‹œê¸€ì‘ì„±í™”ë©´ ìš”ì²­
 	@RequestMapping("/new.com")
 	public String write() {
 		return"community/new";
 	}
 	
-	//½Å±Ô°Ô½Ã±Û ÀúÀåÃ³¸® ¿äÃ»
+	//ì‹ ê·œê²Œì‹œê¸€ ì €ì¥ì²˜ë¦¬ ìš”ì²­
 	@RequestMapping("/insert.com")
 	public String insert(CommunityVO vo, MultipartFile file, HttpSession session) {
-		//Ã·ºÎÆÄÀÏ
+		//ë¡œê·¸ì¸í•œ ì‚¬ìš©ìì˜ useridë¥¼ ë‹´ëŠ”ë‹¤.
+	    vo.setUserid(((MainVO)session.getAttribute("info_login")).getUserid());
+		vo.setWriter(((MainVO)session.getAttribute("info_login")).getWriter());
+	    System.out.println(vo.getWriter());
+		//ì²¨ë¶€íŒŒì¼
 		if(file.getSize()>0) {
 			vo.setFilename(file.getOriginalFilename());
 			vo.setFilepath(common.upload("community", file, session));
@@ -66,77 +74,116 @@ public class commuityController {
 		return"redirect:list.com";
 	}
 	
-	//°Ô½Ã±Û »ó¼¼È­¸é ¿äÃ»
+	//ê²Œì‹œê¸€ ìƒì„¸í™”ë©´ ìš”ì²­
 	@RequestMapping("/detail.com")
-	public String detail(Model model, int id, @RequestParam(defaultValue="0") int read) {
-		if(read == 1) {
-			service.read(id);	//Á¶È¸¼ö Áõ°¡ Ã³¸®
+	public String detail(HttpServletResponse response, HttpServletRequest request,
+			Model model, int id, int code, 
+			@RequestParam(defaultValue="0") int read) {
+		if(read==1) {
+			service.read(id);		//ì¡°íšŒìˆ˜ì²˜ë¦¬
 		}
-		model.addAttribute("vo",service.detail(id));
-		model.addAttribute("crlf", "\r\n");
-		model.addAttribute("lf", "\n");
-		model.addAttribute("page", page);	//curpage Á¤º¸
-		return"community/detail";
+			model.addAttribute("vo",service.detail(id));
+			model.addAttribute("crlf", "\r\n");
+			model.addAttribute("lf", "\n");
+			model.addAttribute("page", page);	//curpage ì •ë³´
+			return"community/detail";
 	}
-	
-	//°Ô½Ã±Û ¼öÁ¤È­¸é ¿äÃ»(ÀÚÀ¯°Ô½ÃÆÇ)
+
+	//ê²Œì‹œê¸€ ìˆ˜ì •í™”ë©´ ìš”ì²­(ììœ ê²Œì‹œíŒ)
 	@RequestMapping("/modify.com")
 	public String modify(Model model, int id) {
 		model.addAttribute("vo", service.detail(id));
 		return"community/modify";
 	}
 	
-	//°Ô½Ã±Û Á¤º¸¼öÁ¤ Ã³¸®¿äÃ»
+	//ê²Œì‹œê¸€ ì •ë³´ìˆ˜ì • ì²˜ë¦¬ìš”ì²­
 	@RequestMapping("/update.com")
 	public String update(CommunityVO vo, MultipartFile file, HttpSession session, String attach) {
-		//¿ø·¡ Ã·ºÎµÈ ÆÄÀÏÀÌ ¾ø´Âµ¥ º¯°æÇÏ¸é¼­ Ã·ºÎÇÏ´Â °æ¿ì
-		//¿ø·¡ DB¿¡ ÀúÀåµÇ¾î ÀÖ´ø Ã·ºÎÆÄÀÏÁ¤º¸¸¦ Á¶È¸ÇØ ¿Â´Ù.
+		//ì›ë˜ ì²¨ë¶€ëœ íŒŒì¼ì´ ì—†ëŠ”ë° ë³€ê²½í•˜ë©´ì„œ ì²¨ë¶€í•˜ëŠ” ê²½ìš°
+		//ì›ë˜ DBì— ì €ì¥ë˜ì–´ ìˆë˜ ì²¨ë¶€íŒŒì¼ì •ë³´ë¥¼ ì¡°íšŒí•´ ì˜¨ë‹¤.
 		CommunityVO commu = service.detail(vo.getId());
 		
-		String uuid = commu.getFilepath();			//°øÁö±Û ÇÑ°ÇÀÇ Á¤º¸¸¦ ¹İÈ¯
+		String uuid = commu.getFilepath();			//ê³µì§€ê¸€ í•œê±´ì˜ ì •ë³´ë¥¼ ë°˜í™˜
 		uuid = session.getServletContext().getRealPath("resources") + uuid;   
 		
 		if(file.getSize()> 0) {
 			vo.setFilename(file.getOriginalFilename());
 			vo.setFilepath(common.upload("community", file, session));
-		//¿ø·¡ Ã·ºÎµÈ ÆÄÀÏÀÌ ÀÖ¾ú°í ±× ÆÄÀÏÀ» ´Ù¸¥ ÆÄÀÏ·Î º¯°æÇØ Ã·ºÎÇÏ´Â °æ¿ì
-		//¿ø·¡ Ã·ºÎµÈ ÆÄÀÏÀº »èÁ¦
+			//ì›ë˜ ì²¨ë¶€ëœ íŒŒì¼ì´ ìˆì—ˆê³  ê·¸ íŒŒì¼ì„ ë‹¤ë¥¸ íŒŒì¼ë¡œ ë³€ê²½í•´ ì²¨ë¶€í•˜ëŠ” ê²½ìš°
+			//ì›ë˜ ì²¨ë¶€ëœ íŒŒì¼ì€ ì‚­ì œ
 			File f = new File(uuid);
 			if(f.exists()) f.delete();
 		}else {
-			//¿ø·¡ Ã·ºÎµÈ ÆÄÀÏÀÌ ÀÖ¾ú´Âµ¥ Ã·ºÎµÈ ÆÄÀÏÀ» »èÁ¦ÇÏ´Â °æ¿ì
+			//ì›ë˜ ì²¨ë¶€ëœ íŒŒì¼ì´ ìˆì—ˆëŠ”ë° ì²¨ë¶€ëœ íŒŒì¼ì„ ì‚­ì œí•˜ëŠ” ê²½ìš°
 			if(attach.equals("y")) {
 				File f = new File(uuid);
 				if(f.exists()) f.delete();
 			}else {
-				//¿ø·¡ Ã·ºÎµÈ ÆÄÀÏÀÌ ÀÖ°í ±×´ë·Î »ç¿ëÇÏ´Â °æ¿ì
+				//ì›ë˜ ì²¨ë¶€ëœ íŒŒì¼ì´ ìˆê³  ê·¸ëŒ€ë¡œ ì‚¬ìš©í•˜ëŠ” ê²½ìš°
 				vo.setFilename(commu.getFilename());
 				vo.setFilepath(commu.getFilepath());
 			}
 		}
 		service.update(vo);
-		return "redirect:detail.com?id=" + vo.getId();
+		return "redirect:detail.com?id=" + vo.getId() + "&code=" + vo.getCode();
 	}
 	
-	//°Ô½Ã±Û »èÁ¦ Ã³¸®¿äÃ»
+	//ê²Œì‹œê¸€ ì‚­ì œ ì²˜ë¦¬ìš”ì²­
 	@RequestMapping("/delete.com")
-	public String delete(int id) {
+	public String delete(int id, HttpSession session) {
+		//ì²¨ë¶€ëœ íŒŒì¼ì´ ìˆë‹¤ë©´ ë¬¼ë¦¬ì  ê³µê°„ì—ì„œ í•´ë‹¹ íŒŒì¼ì„ ì‚­ì œ
+		File f = new File (
+			session.getServletContext().getRealPath(
+			"resources" + service.detail(id).getFilepath())	);
+		if( f.exists() ) f.delete();
+				
+		//í•´ë‹¹ ê³µì§€ê¸€ì„ DBì—ì„œ ì‚­ì œí•œ í›„
+		//ëª©ë¡í™”ë©´ìœ¼ë¡œ ì—°ê²°
 		service.delete(id);
 		return"redirect:list.com";
 	}
 	
-	//Ã·ºÎÆÄÀÏ ´Ù¿î·Îµå ¿äÃ»
+	//ì²¨ë¶€íŒŒì¼ ë‹¤ìš´ë¡œë“œ ìš”ì²­
 	@ResponseBody @RequestMapping("/download.com")
 	public File download(int id, HttpSession session, HttpServletResponse response) {
 		CommunityVO vo = service.detail(id);
 		return common.download(vo.getFilepath(), vo.getFilename(), session, response);
 	}
 	
-	//Áöµµ È­¸é ¿äÃ»
+	//ì§€ë„ í™”ë©´ ìš”ì²­
 	@RequestMapping("/map.com")
 	public String map() {
 		return"community/map";
 	}
 	
+	//ëŒ“ê¸€ ì €ì¥ ì²˜ë¦¬ ìš”ì²­
+	@ResponseBody @RequestMapping("/community/comment/insert")
+	public boolean comment_insert(int pid, String content, HttpSession session) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("pid", pid);
+		map.put("content", content);
+		map.put("userid", ((MainVO)session.getAttribute("info_login")).getUserid());
+		return service.comment_insert(map);
+	}
 
+	//ëŒ“ê¸€ì´ ë³´ì—¬ì§€ëŠ” ì²˜ë¦¬
+	@RequestMapping("/community/comment/{pid}")
+	public String comment_list(@PathVariable int pid, Model model) {
+		model.addAttribute("list",service.comment_list(pid));
+		model.addAttribute("crlf","\r\n");			
+		model.addAttribute("lf", "\n");
+		return"community/comment/list";
+	}
+	
+	//ëŒ“ê¸€ ìˆ˜ì •ì²˜ë¦¬
+	@ResponseBody @RequestMapping(value="/community/comment/update", produces="application/text; charset=utf-8")
+	public String comment_update(@RequestBody CommentVO vo) {
+		return service.comment_update(vo) ? "ì„±ê³µ" : "ì‹¤íŒ¨";
+	}
+	
+	//ëŒ“ê¸€ ì‚­ì œì²˜ë¦¬
+	@ResponseBody @RequestMapping("/community/comment/delete/{id}")
+	public void comment_delete(@PathVariable int id) {
+		service.comment_delete(id);
+	}
 }

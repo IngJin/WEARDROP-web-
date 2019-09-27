@@ -54,27 +54,26 @@ public class CommunityDAO implements CommunityService {
 		return sql.selectList("community.mapper.list");
 	}
 
-	@Override // ¾Èµå·ÎÀÌµå
+	@Override // ì•ˆë“œë¡œì´ë“œ
 	public List<CommunityVO> and_list() {
 		return sql.selectList("andcomm.mapper.list");
 	}
 
-	@Override // ¾Èµå·ÎÀÌµå
+	@Override  // ì•ˆë“œë¡œì´ë“œ
 	public List<CommunityVO> and_list2() {
 		return sql.selectList("andcomm.mapper.list2");
 	}
 
 	@Override
-	public boolean and_insert(HashMap map) {
-		System.out.println("DAO ¼º°ø");
-		return sql.insert("andcomm.mapper.insert", map) > 0 ? true : false;
+	public boolean and_insert(CommunityVO vo) {
+		return sql.insert("andcomm.mapper.insert", vo) > 0 ? true : false;
 	}
 
 	@Override
 	public CommunityPage list(CommunityPage vo) {
-		// ÃÑ ¸ñ·Ï ¼ö Á¶È¸ - ÆäÀÌÁöÁ¤º¸ÀÇ totalList ÇÊµå¿¡ ´ã±â
+		// ì´ ëª©ë¡ ìˆ˜ ì¡°íšŒ - í˜ì´ì§€ì •ë³´ì˜ totalList í•„ë“œì— ë‹´ê¸°
 		vo.setTotalList((Integer) sql.selectOne("community.mapper.total", vo));
-		// ÃÑ ¸ñ·Ï¼ö¿¡ µû¶ó ÃÑ ÆäÀÌÁö, ÃÑ ºí·°, ÇöÀçÆäÀÌÁö¿¡¼­ÀÇ ½ÃÀÛ/³¡ ±Û, ½ÃÀÛ/³¡ ÆäÀÌÁö¹øÈ£ °áÁ¤
+		// ì´ ëª©ë¡ìˆ˜ì— ë”°ë¼ ì´ í˜ì´ì§€, ì´ ë¸”ëŸ­, í˜„ì¬í˜ì´ì§€ì—ì„œì˜ ì‹œì‘/ë ê¸€, ì‹œì‘/ë í˜ì´ì§€ë²ˆí˜¸ ê²°ì •
 		List<CommunityVO> list = sql.selectList("community.mapper.list", vo);
 		vo.setList(list);
 		return vo;
@@ -90,4 +89,28 @@ public class CommunityDAO implements CommunityService {
 		return sql.update("andcomm.mapper.update", map) > 0 ? true : false;
 	}
 
+	@Override
+	public List<CommunityVO> list(HashMap<String, String> map) {
+		return sql.selectList("community.mapper.list", map);
+	}
+
+	@Override
+	public boolean comment_insert(HashMap<String, Object> map) {
+		return sql.insert("community.mapper.comment_insert", map) >0 ? true : false;
+	}
+
+	@Override
+	public List<CommentVO> comment_list(int pid) {
+		return sql.selectList("community.mapper.comment_list",pid);
+	}
+
+	@Override
+	public boolean comment_update(CommentVO vo) {
+		return sql.update("community.mapper.comment_update", vo) > 0 ? true : false;
+	}
+
+	@Override
+	public boolean comment_delete(int id) {
+		return sql.delete("community.mapper.comment_delete", id) > 0 ? true : false;
+	}
 }

@@ -1,0 +1,464 @@
+
+body {
+	font-family: Ubuntu, Helvetica, Verdana, Arial, sans-serif;
+	font-size: 14px;
+	line-height: 1.5;
+	background-color: #ffffff;
+	overflow-y: auto;
+}
+
+input[type=text], input[type=password], input[type=email] {
+	height: 35px;
+	border: hidden;
+	background-color: #F1F1F1;
+	border-bottom: 1px solid #C0C0C0;
+}
+
+#weardrop_wrap{
+	height: 100%;
+	width: 100%;
+}
+
+body::-webkit-scrollbar {
+	display: none;
+}
+
+div {
+	display: block;
+}
+
+a:hover {
+	cursor: pointer;
+}
+
+#weardrop_wrap #weardrop_menu {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 175px;
+	height: 100%;
+	background-color: #fff;
+}
+
+#weardrop_wrap #weardrop_menu h1 {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	margin-top: -37px;
+	width: 100%;
+}
+
+#weardrop_wrap #weardrop_menu h1 a, #weardrop_wrap #weardrop_menu h1 img
+	{
+	position: relative;
+	width: 100%;
+}
+
+#weardrop_wrap #weardrop_contents {
+	margin-left: 250px;
+	height: 100%;
+}
+
+.gal_icon {
+	height: 15.5px;
+	/* line-height: 33px; */
+	/* margin-left:3px; */
+	vertical-align: text-bottom;
+}
+
+/* 잉진의 디자인 */
+/* 헤더 */
+#weardrop_contents header h1 {
+	font-size: 4em;
+	margin: 0.2em;
+}
+
+#ingjin_main h2 {
+	margin: 0;
+	padding: 0 1em;
+	background: #000;
+	font-size: 2em;
+	color: #fff;
+}
+
+#ingjin_main h3 {
+	margin-bottom: 0;
+}
+
+/* 섹션 */
+#ingjin_main aside, #ingjin_main section, #ingjin_main comment {
+	float: left;
+	margin: 0 10px;
+}
+
+/* 섹션별 넓이 */
+#ingjin_main aside {
+	width: 300px;
+}
+
+#ingjin_main section {
+	width: 600px;
+}
+
+#ingjin_main comment {
+	width: 500px;
+}
+
+/* 섹션 블록 */
+#ingjin_main .aside_block {
+	float: left;
+	width: 280px;
+	padding: 10px;
+}
+
+#ingjin_main .post_block {
+	float: left;
+	width: 580px;
+	padding: 10px;
+}
+
+#ingjin_main .comment_block {
+	float: left;
+	width: 480px;
+	padding: 10px;
+}
+
+#ingjin_main .list_block {
+	float:left;
+	width: 980px;
+	padding: 10px;
+}
+
+#ingjin_main .aside_block .listBtn {
+	margin-block-start: 1em;
+	margin-block-end: 1em;
+	margin-inline-start: 0px;
+	margin-inline-end: 0px;
+	margin-bottom: 0;
+}
+
+#ingjin_main .aside_block .inputText {
+	/* left: 175px; */
+	width: 98%;
+	height: 50px;
+	background-color: #f1f1f1;
+	font-size: 14px;
+	display: block;
+	border: none;
+	padding:10px;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    margin-bottom: 0;
+}
+
+#ingjin_main .aside_block .inputBtn {
+	margin: -25px 0 0 240px;
+	display: block;
+	width: 15px;
+	height: 15px;
+}
+
+#ingjin_main .aside_block .insertBtn {
+	margin-block-start: 1em;
+	margin-block-end: 1em;
+	margin-inline-start: 0px;
+	margin-inline-end: 0px;
+	margin-bottom: 0;
+}
+
+#ingjin_main .aside_block .ingstagram {
+	margin-block-start: 1em;
+	margin-block-end: 1em;
+	margin-inline-start: 0px;
+	margin-inline-end: 0px;
+	margin-bottom: 0;
+}
+
+/* 본문 게시글 리스트 */
+#ingjin_main .container {
+	float: left;
+	width: 100%;
+}
+
+#ingjin_main .tab_container th {
+	text-align: center;
+}
+
+/* #ingjin_main a {color:#000;} */
+
+#ingjin_main .aside_box {
+	margin: 10px 0 0 0;
+	background: #000;
+	color: #fff;
+}
+
+#ingjin_main h2{
+	padding-left: 10px;
+}
+
+#ingjin_main .aside_box h2 {
+	padding: 0;
+}
+
+#ingjin_main .aside_box a {
+	color: #fff;
+}
+
+#ingjin_main .item {
+	border-bottom: dotted 1px #000;
+}
+
+#ingjin_main p {
+	margin-bottom: 0;
+}
+
+#ingjin_main .more {
+	margin: 0;
+	font-size: 0.8em;
+}
+
+#ingjin_main .right {
+	float: right;
+}
+
+/* 콘텐츠 */
+#ingjin_main .post_header {
+	border-bottom: dotted 1px #000;
+	background-size: 100% 1px;
+}
+
+#ingjin_main .post_title {
+	background-color: #fff;
+	color: #000;
+	padding: 0;
+	margin-bottom: 0;
+	font-size: 26px;
+	font-weight: bold;
+	line-height: 1.6;
+}
+
+#code{
+	margin-block-start: 1em;
+	margin-block-end: 1em;
+	margin-inline-start: 0px;
+	margin-inline-end: 0px;
+	margin-bottom: 0;
+}
+
+#post_title{
+	margin-block-start: 1em;
+	margin-block-end: 1em;
+	margin-inline-start: 0px;
+	margin-inline-end: 0px;
+	margin-bottom: 0;
+}
+
+#ingjin_main .post_header .statusWrap {
+	*zoom: 1;
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+#ingjin_main .post_header .statusWrap:before, #ingjin_main .post_header .statusWrap:after
+	{
+	display: table;
+	content: "";
+	line-height: 0;
+}
+
+#ingjin_main .post_header .statusWrap:after {
+	clear: both
+}
+
+#ingjin_main .post_header .statusWrap .post_statsus {
+	float: left;
+	display: inline-block;
+	font-size: 14px;
+	line-height: 1.231;
+	letter-spacing: 1px;
+	margin-right: 7px;
+}
+
+#ingjin_main .post_header .statusWrap .post_date {
+	float: right;
+	display: inline-block;
+	font-size: 14px;
+	line-height: 1.231;
+	letter-spacing: 1px;
+	background: #000;
+	color: #fff;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.file-upload {
+	margin-block-start: 1em;
+	margin-block-end: 1em;
+	margin-inline-start: 0px;
+	margin-inline-end: 0px;
+	margin-bottom: 0;
+}
+
+#delete-file {
+	display: none;
+}
+
+#code{
+	margin-block-start: 1em;
+	margin-block-end: 1em;
+	margin-inline-start: 0px;
+	margin-inline-end: 0px;
+	margin-bottom: 0;
+}
+
+
+
+
+#myVideo {
+	position: fixed;
+	left: 175px;
+	top: 0;
+	min-width: 100%;
+	min-height: 100%;
+	z-index: -9999;
+}
+
+/* 잉버튼 */
+.ing_btn {
+  width:100px;
+  height:30px;
+  border:2px solid #fff;
+  background:#000;
+  color:#fff;
+  float:left;
+  text-align:center;
+  cursor:pointer;
+  position:relative;
+  box-sizing:border-box;
+  overflow:hidden;
+  margin:0 0 10px 0px;
+}
+
+.not_login_btn {
+  width:100px;
+  height:30px;
+  border:2px solid #fff;
+  background:#000;
+  color:#fff;
+  float:left;
+  text-align:center;
+  cursor:pointer;
+  position:relative;
+  box-sizing:border-box;
+  overflow:hidden;
+  margin:0 0 10px 0px;
+}
+
+
+.ing_btn a{
+  font-family:arial;
+  font-size:16px;
+  color:#fff;
+  text-decoration:none;
+  line-height:30px;
+  transition:all .5s ease;
+  z-index:2;
+  position:relative;
+}
+
+.not_login_btn a{
+  font-family:arial;
+  font-size:16px;
+  color:#fff;
+  text-decoration:none;
+  line-height:30px;
+  transition:all .5s ease;
+  z-index:2;
+  position:relative;
+}
+
+.ing_eff{
+  width:175px;
+  height:50px;
+  left:-175px;
+  background:#3e3636;
+  color:#000;
+  position:absolute;
+  transition:all .5s ease;
+  z-index:1;
+}
+
+.ing_eff_not{
+  width:175px;
+  height:50px;
+  left:-175px;
+  background:#d72323;
+  color:#fff;
+  position:absolute;
+  transition:all .5s ease;
+  z-index:1;
+}
+
+.ing_eff_yes{
+  width:175px;
+  height:50px;
+  left:-175px;
+  background:#408150;
+  color:#fff;
+  position:absolute;
+  transition:all .5s ease;
+  z-index:1;
+}
+
+.ing_btn:hover .ing_eff {
+  left:0;
+}
+
+.ing_btn:hover .ing_eff_not {
+  left:0;
+}
+
+.ing_btn:hover .ing_eff_yes{
+  left:0;
+}
+
+.not_login_btn:hover .ing_eff_not{
+  left:0;
+}
+
+
+
+
+.not_login_btn:hover a{
+  color:#fff;
+  text-decoration:line-through;
+}
+
+.ing_btn:hover a{
+  color:#fff;
+}
+
+#myVideo {
+	position: fixed;
+	left: 175px;
+	top: 0;
+	min-width: 100%;
+	min-height: 100%;
+	z-index: -9999;
+}
+
+.section_icon{
+	width: 20px; 
+	height: 20px; 
+	margin-right: 10px;
+}
+
+.ingbox{
+	background-color:#fff; 
+	box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.5);
+}

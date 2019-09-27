@@ -3,10 +3,16 @@ package community;
 import java.sql.Date;
 
 public class CommunityVO {
-	private int id, readcnt, likecnt, code, no;
-	private String writer, title, content, filename, filepath;
+	private int id, readcnt, likecnt, code, no, replycnt;
+	private String writer, title, content, filename, filepath, userid;
 	private Date writedate;
 	
+	public int getReplycnt() {
+		return replycnt;
+	}
+	public void setReplycnt(int replycnt) {
+		this.replycnt = replycnt;
+	}
 	public int getNo() {
 		return no;
 	}
@@ -73,5 +79,10 @@ public class CommunityVO {
 	public void setWritedate(Date writedate) {
 		this.writedate = writedate;
 	}
-	
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
 }

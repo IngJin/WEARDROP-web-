@@ -17,6 +17,8 @@
 	<resources mapping="/css/**"  location="/resources/css/"/>
 	<resources mapping="/img/**"  location="/resources/img/"/>
 	<resources mapping="/js/**"  location="/resources/js/"/>
+	<resources mapping="/video/**"  location="/resources/video/"/>	
+	<resources location="/resources/upload/" mapping="/upload/**"/><!-- js 자원-->
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -34,6 +36,7 @@
 	
 	<context:component-scan base-package="com.hanul.iot" />
 	
-	
+	<!-- NaverLoginBO Class에 대한 Bean설정 추가 -->
+	<beans:bean id="naverLoginBO" class="main.NaverLoginBO" />
 	
 </beans:beans>

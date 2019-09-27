@@ -1,20 +1,18 @@
 @charset "utf-8";
-
-
 html, body {
 	width: 100%;
 	height: 100%;
 	margin: 0 auto;
 	font-size: 15px;
 	text-align: left;
-	background-color: #F1F1F1;
 }
+
 
 .out {
 	width: 100%;
 	height: 100%; 
 	font-family: 'Darker Grotesque', sans-serif;
-	margin-top: -200px;
+	margin-top: -42px;
 	font-size: 1.3em;
 }
 
@@ -26,8 +24,9 @@ html, body {
 
 #content {
 	clear: both;
-	height: 240px;
+	height: 500px;
 	position: relative;
+	margin-top: 250px;
 }
 .service-over, .service-over2 {
 	display: none;
@@ -47,16 +46,24 @@ div.block {
 	overflow: hidden;
 	float: left;
 	width: 40%;
-	height: 100%;
 	margin-left: 20%;
+	background-color: #fff;
 }
 
 .join2 {
-	overflow: hidden;
-	width: 40%;
-	height: 100%;
 	margin-left: 60%;
+	background-color:#fff; 
+	box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.5);
 }
+
+.all {	
+	height: 100%;
+    overflow-y: auto; 
+}
+
+.all::-webkit-scrollbar {
+	display:none;
+} 
 
 a {text-decoration:none; color:#000000;}
 .box { margin:10px; }
@@ -64,34 +71,50 @@ a {text-decoration:none; color:#000000;}
 .box .title a { display:block; padding:10px; }
 .box .cont { padding:10px; }
 
+.login1 {
+	margin-left:175px;
+	position: absolute;
+	bottom: 10%;
+	left: 10%;
+	background-color: #fff;
+	box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.5);
+}
+
+#sign_in_logo{
+	margin-left:175px;
+	position: absolute;
+	left:10%;
+	top:30%;	
+}
+
 .group {
 	margin-left: -20px;
 	margin-top: 20px;
 }
 
-.login {
-	height: 100%;
-	margin-top: 30%;
-}
 .login_h1 {
 	margin-bottom: 70px;
+	height: 42px;
 }
-
 
 .login2 {
-	height: 100%;
-	margin-top: 10%;
+	position: absolute;
+	bottom: 10%;
+	right: 10%;
+	width:30%;
+	background-color: #fff;
+	box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.5);
 }
-input[type=text], input[type=password], input[type=email] {
-	height: 35px;
-	border: hidden;
-	background-color: #F1F1F1;
-	border-bottom: 1px solid #DCDDDC;
-	
-}
-.login_list {
+
+
+
+
+
+
+
+/* .login_list {
 	width: 60%;
-}
+} */
 
 input:focus {
   outline: none;
@@ -102,27 +125,35 @@ input:focus {
 }
 
 .login_h1 {
-	font-family: 'Raleway', sans-serif;
+	/* font-family: 'Raleway', sans-serif;
 	color: #4F4F4D;
-	font-size: 1.6em;
+	font-size: 1.6em; */
+	margin: 0;
+	padding: 0 1em;
+	background: #000;
+	font-size: 2em;
+	color: #fff;
 }
 
 .btn {
     background-color: #4F4F4D;
    	font-family: 'Darker Grotesque', sans-serif;
-   	font-size: 1.3em;
     color: #F1F1F1;
     padding: 8px 30px;
+    font-size: 1.3em;
     border-radius: 30px;
 }
 .btn_div {
-	margin-top: 20px;	
+	margin-top: 20px;
+	text-align: center;	
 }
+
 .login_font {
 	font-family: 'Darker Grotesque', sans-serif;
 	color: #4F4F4D;
 	font-size: 1.3em;
 }
+
 body.loading:after {
 	content: '';
 	display: block;
@@ -174,7 +205,7 @@ body.ofH {
 	display: block;
 	position: absolute;
 	left: 40%;
-	top: 3%;
+	top: 40%;
 	width: 48px;
 	height: 48px;
 	margin-top: -24px;
@@ -184,12 +215,13 @@ body.ofH {
 .header a.all-menu span {
 	display: block;
 	position: absolute;
-	left: 12px;
+	left: 18px;
 	width: 24px;
 	height: 1px;
 	background: #000;
 	-webkit-transition-duration: .4s;
 	transition-duration: .4s;
+	
 }
 
 /* 이게 햄버거 */
@@ -218,13 +250,17 @@ body.ofH {
 
 .header .fixmenu {
 	position: relative;
-	height: 100%;
+	height: 10%;
 	z-index: 1;
 }
 
 .header .fixmenu.active .plus {
 	opacity: 0;
 	filter: alpha(opacity = 0);
+}
+
+.header .fixmenu.active {
+	width: 90px;
 }
 
 .header .fixmenu .plus span {
@@ -285,6 +321,9 @@ body.ofH {
 	transform: translateX(0);
 }
 
+.header .grid {
+	margin-top: -18px;	
+}
 .header .gnbIn {
 	overflow: hidden;
 	overflow-y: auto;
@@ -292,8 +331,6 @@ body.ofH {
 	left: 0;
 	width: 175px;
 	height: 100%;
-	padding-top: 80px;
-	padding-bottom: 80px;
 	margin-left: -90px;	
 	text-align: left;
 	-webkit-box-sizing: border-box;
@@ -303,12 +340,10 @@ body.ofH {
 	box-sizing: border-box;
 }
 
-.header .gnbIn:before {
-	content: '';
-	display: inline-block;
-	height: 40%;
-	vertical-align: middle;
-}
+.header .gnbIn::-webkit-scrollbar {
+	display:none;
+} 
+
 
 .header .gnbIn>div {
 	display: inline-block;
@@ -337,7 +372,7 @@ body.ofH {
 }
 
 .header .gnbwrap.open .gnbIn {
-	left: 80px;
+	left: 90px;
 }
 
 .header .gnbwrap.open #gnb li {
@@ -345,7 +380,7 @@ body.ofH {
 	-webkit-transform: translateX(0);
 	-moz-transform: translateX(0);
 	-o-transform: translateX(0);
-	-ms-transform: translateX(0);
+	-ms-transform: translateX(0);	
 	transform: translateX(0);
 }
 
@@ -362,9 +397,255 @@ body.ofH {
 }
 
 .login_button {
-	background-color: #4F4F4D;
+	/* background-color: #4F4F4D;
    	font-family: 'Darker Grotesque', sans-serif;
     color: #F1F1F1;
     padding: 4px 10px;
-    border-radius: 13px;
+    border-radius: 13px; */
+  	background-color: #000;
+    color: #fff;
+    border: 0;
+    padding: 4px 10px;
+    width: 100px;
+    cursor: pointer;
+}
+
+.login_button:hover{
+	color:#fff;
+}
+
+a:hover {
+	color: #aeaeae
+}
+
+
+.box .cont {
+	/* padding: 10px; */
+	font-size: 0.8em;
+	text-align: left;
+	margin-left: 20px;
+}
+
+a, a:hover, .pic .pic-image, .pic-caption, .pic:hover .pic-caption, .pic:hover img
+	{
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	-ms-transition: all 0.5s ease;
+	transition: all 0.5s ease
+}
+
+#manager_btn{
+    font-size: 0.8em;	
+}
+#display {
+	display: none;
+}
+
+#login_btn, #logout_btn {
+	font-size: 0.9em;	
+} 
+
+/* 잉버튼 */
+.ing_btn {
+  width:175px;
+  height:30px;
+  border:2px solid #fff;
+  background:#000;
+  color:#fff;
+  float:left;
+  text-align:center;
+  cursor:pointer;
+  position:relative;
+  box-sizing:border-box;
+  overflow:hidden;
+  margin:0 0 10px 0;
+}
+
+.menu_ing_btn {
+  width:175px;
+  height:30px;
+  border:2px solid #fff;
+  background:#000;
+  color:#fff;
+  float:left;
+  text-align:center;
+  cursor:pointer;
+  position:relative;
+  box-sizing:border-box;
+  overflow:hidden;
+  margin:0 0 10px 0;
+}
+
+.not_login_btn {
+  width:100px;
+  height:30px;
+  border:2px solid #fff;
+  background:#000;
+  color:#fff;
+  float:left;
+  text-align:center;
+  cursor:pointer;
+  position:relative;
+  box-sizing:border-box;
+  overflow:hidden;
+  margin:0 0 10px 0px;
+}
+
+
+.ing_btn a{
+  font-family:arial;
+  font-size:16px;
+  color:#fff;
+  text-decoration:none;
+  line-height:30px;
+  transition:all .5s ease;
+  z-index:2;
+  position:relative;
+}
+
+.not_login_btn a{
+  font-family:arial;
+  font-size:16px;
+  color:#fff;
+  text-decoration:none;
+  line-height:30px;
+  transition:all .5s ease;
+  z-index:2;
+  position:relative;
+}
+
+.ing_eff{
+  width:175px;
+  height:50px;
+  left:-175px;
+  background:#3e3636;
+  color:#000;
+  position:absolute;
+  transition:all .5s ease;
+  z-index:1;
+  font-weight: bold;
+}
+
+.menu_ing_eff{
+  width:175px;
+  height:50px;
+  left:-175px;
+  background:#AEAEAE;
+  color:#000;
+  position:absolute;
+  transition:all .5s ease;
+  z-index:1;
+  font-weight: bold;
+}
+
+.ing_eff_out{
+  width:175px;
+  height:50px;
+  left:-175px;
+  background:#d72323;
+  color:#000;
+  position:absolute;
+  transition:all .5s ease;
+  z-index:1;
+  font-weight: bold;
+}
+
+.ing_eff_yes{
+  width:175px;
+  height:50px;
+  left:-175px;
+  background:#408150;
+  color:#000;
+  position:absolute;
+  transition:all .5s ease;
+  z-index:1;
+  font-weight: bold;
+}
+
+.ing_eff_not{
+  width:175px;
+  height:50px;
+  left:-175px;
+  background:#ff0000;
+  color:#fff;
+  position:absolute;
+  transition:all .5s ease;
+  z-index:1;
+}
+
+.ing_eff_kakao{
+  width:175px;
+  height:50px;
+  left:-175px;
+  background:#ffe812;
+  color:#000;
+  position:absolute;
+  transition:all .5s ease;
+  z-index:1;
+  font-weight: bold;
+}
+
+.ing_eff_naver{
+  width:175px;
+  height:50px;
+  left:-175px;
+  background:#2DB400;
+  color:#000;
+  position:absolute;
+  transition:all .5s ease;
+  z-index:1;
+  font-weight: bold;
+}
+
+.ing_btn:hover .ing_eff {
+  left:0;
+}
+
+.ing_btn:hover .ing_eff_yes {
+  left:0;
+}
+
+.ing_btn:hover .ing_eff_kakao{
+  left:0;
+}
+
+.ing_btn:hover .ing_eff_naver {
+  left:0;
+}
+
+.ing_btn:hover .ing_eff_out {
+  left:0;
+}
+
+.menu_ing_btn:hover  .menu_ing_eff{
+  left:0;
+}
+.not_login_btn:hover .ing_eff_not{
+  left:0;
+}
+
+.not_login_btn:hover a{
+  color:#fff;
+  text-decoration:line-through;
+}
+
+
+.ing_btn:hover a{
+  color:#fff;
+}
+
+.menu_ing_btn:hover a{
+  color:#fff;
+}
+
+.ing_btn:hover input{
+  color:#fff;
+  
+}
+
+.section_icon{
+	width: 20px; 
+	height: 20px; 
+	margin-right: 10px;
 }

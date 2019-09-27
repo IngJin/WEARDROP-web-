@@ -2,8 +2,15 @@ package main;
 
 public class MainVO {
 
-	private String userid, writer, userpw, email, phone, admin;
+	private String userid, writer, userpw, email, admin, no;
 
+	public String getNo() {
+		return no;
+	}
+	
+	public void setUNo(String no) {
+		this.no = no;
+	}
 	public String getUserid() {
 		return userid;
 	}
@@ -34,14 +41,6 @@ public class MainVO {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone.replace(",", "-");
 	}
 
 	public String getAdmin() {

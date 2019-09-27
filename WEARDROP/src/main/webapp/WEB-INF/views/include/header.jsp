@@ -1,145 +1,88 @@
 <%@page import="java.util.Date"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>   
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <link rel="stylesheet" type="text/css" href="css/menu.css?v=<%= new Date().getTime() %>">
 <link href="https://fonts.googleapis.com/css?family=Darker+Grotesque&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding|Raleway&display=swap" rel="stylesheet">
+<script type="text/javascript" src="js/header.js"></script>
+<link type="text/css" rel="stylesheet" href="css/MarcTooltips.css" media="all"/>
+<script type="text/javascript" src="js/MarcTooltips.js"></script>
 <style type="text/css">
+    
+.login {
+    	position:fixed;
+    	bottom:20%;
+}
 </style>
 
-<script type="text/javascript">
-$(function(){
-
-    var group = $(".group");
-
-    group.each(function(){
-        var _group = new GroupBox(this);
-    });
-
-    // 사용자 정의 생성자 함수 정의
-    function GroupBox(groupElement){
-
-        var box = $(groupElement).find(".box");
-        var title = $(groupElement).find(".box .title a");
-
-        box.each(function(idx){
-            var newBox = new RootBox(this);
-            if (idx >= 0){
-                newBox.siblingsClose();
-            }
-        });
-    }
-
-    // 사용자 정의 생성자 함수 정의
-    function RootBox(boxElement){
-        var _this = this;
-        var boxEl = $(boxElement);
-        var target = $(boxEl).find(".title a");
-        var cont = $(boxEl).find(".cont");
-
-        // _groupParent = $(boxEl).parent();
-
-        target.on("click", anchorClickEvent);
-
-        function anchorClickEvent() {
-
-            if (cont.is(':hidden')) {
-                _this.open();
-            } else {
-                _this.close();
-            }
-        }
-
-        _this.siblingsClose = function () {
-            cont.css('display','none');
-        }
-
-        _this.open = function() {
-            cont.slideDown();
-        }
-        _this.close = function() {
-            cont.slideUp();
-        }
-    }
-});
-
-$(function($) {
-    $("body").css("display", "none");
-    $("body").fadeIn(1000);
-    $("a.transition").click(function(event){
-        event.preventDefault();
-        linkLocation = this.href;
-        $("body").fadeOut(500, redirectPage);
-    });
-    function redirectPage() {
-    window.location = linkLocation;
-    }
-});
-
-$(function(){
-	   // gnb
-	   $('#header a.all-menu').on('click',function(){
-	      if ($(this).hasClass('active')) {
-	         $('.mask').remove();
-	         $('body').removeClass('ofH');
-	         $('.gnbwrap').removeClass('open');
-	         $('.header .fixmenu').removeClass('active');
-	         $(this).removeClass('active');
-	      } else {
-	         $('.gnbwrap').addClass('open');
-	         $('body').addClass('ofH');
-	         $('.header .fixmenu').addClass('active');
-	         $(this).addClass('active');
-	         $('body').append('<div class="mask"></div>');
-	         $('.mask').css({'z-index':500});
-	      }
-	      return false;
-	   });
-});
-</script>
 <body>
-<header id="header">
-      <div class="header">
-         <div class="fixmenu">
-            <a class="all-menu"> <span></span><span></span><span></span></a>
-         </div>
-         <div class="gnbwrap">
-            <div class="gnbIn">
-               <div>
-                  <ul id="gnb">
-                    <div class="out">
-						<div class="content">			 											
-							<div id="content">
-								<a id="weather" onclick="location='weather.ho'">What should I wear today?</a> <br/><br/>
-								<a id="daliy" onclick="location='index'">DailyLook</a> <br/><br/>
-								<a href="list.se">UsedMarket</a><br/>
-								<div class="group">												
-									<div class="box">
-										<div class="title"><a href="#">Service Center</a></div>	
-										<div class="cont"><a onclick="location='index'"><div>Notice</div></a></div>
-										<div class="cont"><a onclick="location='index'">Frequently Asked Question</a></div>
-										<div class="cont" ><a onclick="location='index'">Questions and Answers</a></div>
-									</div>						 		
-									<div class="box">
-										<div class="title"><a href="#">Community</a></div>	
-										<div class="cont"><a href="list.com">Free Board</a></div>
-										<div class="cont" style="font-size:1.2em;"><a href="list.hu">Reviews</a></div>			
-										<div class="cont"><a href="map.com">Find a store</a></div>
-									</div><br/> <!-- box -->
-								</div> <!-- group -->			 													
-							</div>	<!-- contnet id -->
-						</div> <!-- content cl -->
-					</div> <!-- out -->
-                  </ul>        
-               </div>
-            </div> <!-- gbnin-->
-            <p class="logo">
-               <a onclick="location='index'"><img src="img/temporary.png" class="logo_img" alt="로고" /></a>
-            </p>
-         </div>
-      </div>
-   </header>
+    <header id="header">
+        <div class="header">
+            <div class="fixmenu">
+                <a class="all-menu"> <span></span><span></span><span></span></a>
+            </div>
+            <div class="gnbwrap">
+                <div class="gnbIn">
+                    <div class="grid">
+                        <ul id="gnb">
+                            <div class="out">
+                                <div class="content">
+                                    <div id="content">
+                                        <a id="daliy" href="list.gal" style="font-size: 16px;">데일리룩</a> <br /><br />
+                                        <a id="usedmarket" href="list.se" style="font-size: 16px;">중고거래</a><br /><br />
+                                        <a id="servicecenter" href="list.no" style="font-size: 16px;">고객센터</a><br/>
+                                        <div class="group" style="font-size: 16px;">
+                                            <div class="box" >
+                                                <div id="community" class="title"><a href="#">커뮤니티</a></div>
+                                                <div class="cont"><a href="list.com">자유게시판</a></div>
+                                                <div class="cont"><a href="list.hu">후기게시판</a></div>
+                                                <div class="cont"><a href="map.com">매장찾기</a></div>
+                                            </div><br /> <!-- box -->
+				                            
+	              
+				                            <div class="login">
+				                                <c:if test="${ !empty info_login}">
+				                                    <div class="user_info"><a style="font-size:18px; text-align: center;" onclick="location='mypage.ho'">${info_login.userid}<br/> 
+				                                    [${info_login.writer}]</a></div><br />
+				                                    
+				                                    <div class="ing_btn" style="position: fixed; left:0; width: 175px; margin-bottom: 10px;">
+													<div class="ing_eff_out"></div>
+														<a style="cursor: pointer;" onclick="go_logout()">Logout</a>
+													</div><br/>
+				                                   <!--  <a id="login_btn" class="btn" onclick="go_logout()">Logout</a><br/><br/> -->
+				                                 <c:if test="${info_login.admin eq 'Y'}">
+				                                 	<div class="ing_btn" style="position: fixed; left:0; width: 175px; margin-top: 10px;">
+													<div class="ing_eff"></div>
+														<a style="cursor: pointer;" onclick="location='manager.list'">관리자</a>
+									               </div>
+									             </c:if>
+				                                </c:if>
+				                                <c:if test="${ empty info_login}">
+				                                 <div class="ing_btn" style="position: fixed; left:0; width: 175px;">
+				                                 <div class="ing_eff"></div>
+				                                   <a style="cursor: pointer;" onclick="location='login.ho'">Login</a>
+				                                 </div>
+				                                </c:if>
+				                            </div><!-- login -->
+                                        </div> <!-- group -->
+                                        
+                                        <script type="text/javascript">
+											MarcTooltips.add('#daliy', '데일리룩을 공유해보세요 :)', {position:'right'});
+											MarcTooltips.add('#usedmarket', '안전한 중고거래 :)', {position:'right'});
+											MarcTooltips.add('#servicecenter', '공지사항 & 자주묻는질문', {position:'right'});
+											MarcTooltips.add('#community', '하위 카테고리를 선택해주세요 !!', {position:'right'});
+										</script>
+                                    </div> <!-- contnet id -->
+                                </div> <!-- content cl -->
+                            </div> <!-- out -->
+                        </ul>
+                    </div>
+                <p class="logo">
+                    <a onclick="location='index'"><img src="img/logo.png" class="logo_img" alt="로고" /></a>
+                </p>
+                </div> <!-- gbnin-->
+            </div>
+        </div>
+    </header>
 </body>
-

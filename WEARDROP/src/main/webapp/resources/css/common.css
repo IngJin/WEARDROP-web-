@@ -61,7 +61,41 @@ input[type=text], input[type=password] {
 .file-img { width: 20px; height: 20px; cursor: pointer;}
 img { vertical-align: middle; }
 
-
+/* 08.22 추가 */
+	.btn{
+	  font-size:1rem;
+	  color:white;
+	  display:inline-block; /*  인라인은 탑마진이 안먹히므로 블럭처리 안하면 transform 안됨 */
+	  border-radius: 10px;
+	  transition:all 0.1s; /* 장면전환: 모든속성에 대해 0.1초간 부드럽게 클릭되는걸 연출 */    
+      text-shadow: 0px -2px rgba(0, 0, 0.44); /* 글자 테두리 음영 약간투명한 블랙 */
+      margin-bottom: 10px;
+      font-family: 'Indie Flower', cursive;
+	}
+   .btn:active{
+      transform: translateY(10px); /* 눌렸을시 Y방향으로 10픽셀 */
+   }
+   .btn.blue{
+      background-color: #1f75d9;
+      border-bottom: 5px solid #165195; /* 버튼음영(위 색상보다 진하게)*/
+   }
+    .btn.blue:active {
+      border-bottom: 2px solid #165195; /* 눌렀을때 살짝들어가는것처럼 보이게 */
+   }
+   .btn.red{
+      background-color: #ff521e;
+      border-bottom: 5px solid #c1370e; 
+   }
+    .btn.red:active {
+      border-bottom: 2px solid #c1370e; 
+   }
+   .btn.green{
+      background-color: #47C83E;
+      border-bottom: 5px solid #008000; 
+   }
+    .btn.green:active {
+      border-bottom: 2px solid #008000; 
+   }
 
 
 

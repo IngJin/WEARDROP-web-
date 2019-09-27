@@ -3,19 +3,29 @@ package community;
 import java.util.HashMap;
 import java.util.List;
 
+import community.CommentVO;
+
 public interface CommunityService {
-	boolean insert(CommunityVO vo);	//ÀúÀå		
-	List<CommunityVO> list();		//Á¶È¸
-	CommunityVO detail(int id);		//Á¶È¸
-	boolean update(CommunityVO vo);	//º¯°æ
-	boolean delete(int id);			//»èÁ¦
-	void read(int id);				//Á¶È¸¼ö
-	void like(int id);				//ÃßÃµ¼ö
-	CommunityPage list(CommunityPage vo);		//ÆäÀÌÁö
+	boolean insert(CommunityVO vo);	//ì €ì¥		
+	List<CommunityVO> list();		//ì¡°íšŒ
+	List<CommunityVO> list(HashMap<String, String> map);
+	CommunityVO detail(int id);		//ì¡°íšŒ
+	boolean update(CommunityVO vo);	//ë³€ê²½
+	boolean delete(int id);			//ì‚­ì œ
+	void read(int id);				//ì¡°íšŒìˆ˜
+	void like(int id);				//ì¶”ì²œìˆ˜
+	CommunityPage list(CommunityPage vo);		//í˜ì´ì§€
+	boolean comment_insert(HashMap<String, Object> map);	//ëŒ“ê¸€
+	List<CommentVO> comment_list(int pid);		//ëŒ“ê¸€ì¡°íšŒ
+	boolean comment_update(CommentVO vo);		//ëŒ“ê¸€ë³€ê²½
+	boolean comment_delete(int id);				//ëŒ“ê¸€ì‚­ì œ
 	List<CommunityVO> test();
-	List<CommunityVO> and_list();		//Á¶È¸(¾Èµå)
-	List<CommunityVO> and_list2();		//Á¶È¸(¾Èµå)
-	boolean and_insert(HashMap map);	//»ğÀÔ(¾Èµå)
-	boolean and_delete(HashMap map);	//»èÁ¦(¾Èµå)
-	boolean and_update(HashMap map);	//¼öÁ¤(¾Èµå)
+	List<CommunityVO> and_list();		//ì¡°íšŒ(ì•ˆë“œ)
+	List<CommunityVO> and_list2();		//ì¡°íšŒ(ì•ˆë“œ)
+	boolean and_insert(CommunityVO vo);	//ì‚½ì…(ì•ˆë“œ)
+	boolean and_delete(HashMap map);	//ì‚­ì œ(ì•ˆë“œ)
+	boolean and_update(HashMap map);	//ìˆ˜ì •(ì•ˆë“œ)
+
+
+
 }

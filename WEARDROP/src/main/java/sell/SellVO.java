@@ -3,8 +3,8 @@ package sell;
 import java.sql.Date;
 
 public class SellVO {
-	private int id, no;
-	private String writer,title, name;
+	private int id, no, replycnt;
+	private String userid,title,writer, name;
 	private int price;
 	private String content;
 	private Date writedate;
@@ -19,6 +19,18 @@ public class SellVO {
 	public void setNo(int no) {
 		this.no = no;
 	}
+	public int getReplycnt() {
+		return replycnt;
+	}
+	public void setReplycnt(int replycnt) {
+		this.replycnt = replycnt;
+	}
+	public String getWriter() {
+		return writer;
+	}
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
 	public String getName() {
 		return name;
 	}
@@ -31,12 +43,14 @@ public class SellVO {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getWriter() {
-		return writer;
+	
+	public String getUserid() {
+		return userid;
 	}
-	public void setWriter(String writer) {
-		this.writer = writer;
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
+	
 	public String getTitle() {
 		return title;
 	}
@@ -67,6 +81,7 @@ public class SellVO {
 	public void setReadcnt(int readcnt) {
 		this.readcnt = readcnt;
 	}
+	
 	public String getFilename() {
 		return filename;
 	}

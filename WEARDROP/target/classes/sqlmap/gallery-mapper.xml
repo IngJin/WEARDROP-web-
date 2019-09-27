@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gallery.mapper">
+	<select id="list" resultType="gallery.GalleryVO">
+		select * from (select rownum no, n.*
+			from (select * from ootd <include refid="search"/>) n
+			order by writedate desc) n
+		where no between #{beginList} and #{endList}
+		<!-- order by no desc  -->
+	</select>
+	
+	<sql id="search">
+		<if test="search=='title' or search=='content' ">
+			where ${search} like '%' || #{keyword} || '%'
+		</if>
+		
+		<if test="search=='writer'">
+			where userid in ( select userid from member2
+			                     where writer like '%' || #{keyword} || '%' )
+		</if>
+		
+		<if test="search=='all'">
+			where title like '%' || #{keyword} || '%'
+			or content like '%' || #{keyword} || '%'
+			or userid in (select userid from member2
+			               where writer like '%' || #{keyword} || '%' )
+		</if>
+	</sql>
+	
+	<!-- <sql id="search">
+		<if test="search=='title' or search=='content' ">
+			and ${search} like '%' || #{keyword} || '%'
+		</if>
+		<if test="search=='writer'">
+			and userid in ( select userid from member2
+			                     where writer like '%' || #{keyword} || '%' )
+		</if>
+		<if test="search=='all'">
+			and ( title like '%' || #{keyword} || '%'
+			or content like '%' || #{keyword} || '%'
+			or userid in ( select userid from member2
+			               where writer like '%' || #{keyword} || '%' ) )
+		</if>
+	</sql>  -->
+	
+	<select id="detail" resultType="gallery.GalleryVO">
+		select * from ootd where id=#{id}
+	</select>
+	
+	<insert id="insert">
+		insert into ootd (userid, title, content, writer, filename, filepath)
+		values (#{userid}, #{title}, #{content}, #{writer}, #{filename, jdbcType=VARCHAR}, #{filepath, jdbcType=VARCHAR})
+	</insert>
+	
+	<update id="read">
+		update ootd set readcnt = readcnt+1 where id=#{id}
+	</update>
+	
+	<delete id="delete">
+		delete from ootd where id=#{id}
+	</delete>
+	
+	<update id="update">
+		update ootd set title=#{title}, content=#{content},
+							filename = #{filename, jdbcType=VARCHAR}, 
+							filepath = #{filepath, jdbcType=VARCHAR}
+		where id=#{id}
+	</update>
+	
+	<select id="total" resultType="integer">
+		select count(*) from ootd <include refid="search"/>
+	</select>
+	
+	<insert id="comment_insert">
+		insert into gallery_comment(content, userid, pid)
+		values (#{content},#{userid},#{pid})
+	</insert>
+	
+	<select id="comment_list" resultType="gallery.Gallery_CommentVO">
+		select c.*, (select writer from member2
+						where userid=c.userid) writer,
+				to_char(writedate, 'yyyy-mm-dd hh24:mi:ss') writedate
+		from gallery_comment c where pid=#{pid}
+		order by id desc
+	</select>
+	
+	<update id="comment_update">
+		update gallery_comment set content=#{content} where id=#{id}
+	</update>
+	
+	<delete id="comment_delete">
+		delete from gallery_comment where id=#{id}
+	</delete>
+	
+	<update id="galupdate">
+		update ootd set filepath = replace(filepath, '\', '/')
+	</update>
+	
+	<insert id="andInsert">
+		insert into ootd (title, content, writer, filename, filepath)
+		values (#{title}, #{content}, #{writer}, #{filename, jdbcType=VARCHAR}, #{filepath, jdbcType=VARCHAR})
+	</insert>
+	
+	<select id="andlist" resultType="gallery.GalleryVO">
+		select * from ootd order by id desc
+	</select>
+	
+</mapper>
